@@ -1,0 +1,38 @@
+footer {
+    background-color: black; /* Màu nền của footer */
+    padding: 10px; /* Khoảng cách giữa nội dung và viền */
+  }
+  header{
+    background-color: black;
+  }
+  header h1{
+    margin: 0px;
+    color: #ffffff;
+    padding: 20px 0 20px 10px;
+  }
+  nav ul{
+    margin: 0px;
+    padding: 15px 0 15px 10px ;
+  }
+  li{
+    display: inline-block;
+    margin-right: 10px;
+    
+  }
+  a{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+  }
+  section{
+background-color: aliceblue;
+padding: 10px;
+  }
+  span{
+    color: white;
+  }
+  article{
+    background-color: antiquewhite;
+    padding: 10px;
+    margin-bottom: 10px;
+  }

@@ -1,0 +1,55 @@
+body {
+
+    padding: 0px;
+    margin: 0px;
+    background-color: aliceblue;
+}
+
+header {
+    font-weight: bold;
+    font-size: 60px;
+    text-align: center;
+    margin: 33px 600px;
+}
+
+.TuyenDung {
+    padding: 23px 517px;
+    display: inline-block;
+    padding: 33px 600px;
+}
+
+label {
+    display: inline-block;
+    font-family: auto;
+    font-size: 29px;
+    margin: 10px;
+    text-align: left;
+}
+
+input [type="Email"],
+input[type="phone"],
+input[type="text"] input[type="message"] {
+    display: inline;
+    width: 100%;
+    margin-left: 5px;
+}
+
+input[type="CV"] {
+    display: inline;
+}
+
+input[type="submit"] {
+    background-color: black;
+    color: white;
+    display: inline-block;
+}
+
+input,
+textarea {
+    margin: 10px;
+    width: 600px;
+}
+
+input {
+    height: 20px;
+}

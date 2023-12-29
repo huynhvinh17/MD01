@@ -1,0 +1,55 @@
+body{
+    padding: 0px;
+    margin: 0px;
+    font-family: auto;
+}
+.Bai7{
+    width: 80%;
+    margin: 100px 0 0 100px;
+padding: 30px;
+background-color: antiquewhite;
+border-radius: 10px;
+}
+.contaner{
+    width: 25%;
+    display: inline-block;
+    margin: 0 60px 0 30px;
+    vertical-align: top;
+}
+.h2{
+    font-size: 30px;
+    text-transform: uppercase;
+
+}
+.paragrap{
+    font-size: 20px;
+}
+.Quick_links{
+    width: 25%;
+    vertical-align: top;
+    display: inline-block;
+}
+.Follow_us{
+    width: 25%;
+    display: inline-block;
+    vertical-align: top;
+}
+.link{
+    text-decoration: none;
+    color: red;
+    font-size: 30px;
+}
+.social_icon{
+    font-size: 60px;
+}
+
+i{
+    color: none;
+    font-size:60px;
+}
+.lorem{
+    color: cadetblue;
+}
+button{
+    border :none
+}

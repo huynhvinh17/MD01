@@ -1,0 +1,51 @@
+label {
+    background-color: deepskyblue;
+    text-align: center;
+    padding: 20px 10px;
+    height: 100%;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+body {
+    padding: 0px;
+    margin: 0px;
+}
+
+.contaner {
+    text-align: center;
+
+}
+
+.BestShare {
+    margin-left: 10px;
+    font-family: auto;
+    font-size: 20px;
+}
+
+.Best,
+.Company {
+    margin-left: 10px;
+    display: inline-block;
+
+}
+
+.Share {
+    display: inline-block;
+    margin-left: 10px;
+    color: deepskyblue;
+    font-weight: bold;
+}
+
+button {
+    display: inline-block;
+    background-color: black;
+    color: white;
+    padding: 20px;
+    margin: 40px 0 0 20px;
+    cursor: pointer;
+}
+
+.with {
+    margin: 0px
+}

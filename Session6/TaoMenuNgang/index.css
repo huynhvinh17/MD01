@@ -1,0 +1,48 @@
+li#team{
+    display: inline-block;
+    height: 30px;
+    width: 200px;
+    background-color: black;
+    text-align: center;
+    position: relative;
+    line-height: 30px;
+}
+a{
+    text-decoration:none;
+    color: #ffffff;
+}
+*{
+    padding: 0px;
+    margin: 0px ;
+}
+li:hover,li#team:hover{
+    background-color: red;
+}
+li{
+    display: inline-block;
+    height: 30px;
+    width: 200px;
+    background-color: black;
+    text-align: center;
+    line-height: 30px;
+}
+#menu ul ul{
+    top: 30px;
+    visibility: hidden;
+    position: absolute;
+}
+#menu ul li:hover ul{
+    visibility: visible;
+    z-index: 2;
+}
+#menu{
+    margin: 50px;
+    padding: 30px;
+}
+
+.EnglandFootball{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 40px 0 0 0;
+}

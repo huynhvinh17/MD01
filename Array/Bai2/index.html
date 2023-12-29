@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Array</title>
+    <h1>Chèn dấu -</h1>
+    <p id="demo"></p>
+    <p id="demo2"></p>
+    <p id="demo3"></p>
+  </head>
+
+  <body>
+    <script>
+      let yourNumber = prompt("Mời bạn nhập vào một số");
+      let result = [];
+      //let yourNumber = "45656";
+      document.getElementById("demo").innerHTML = yourNumber;
+      console.log(yourNumber);
+      yourInput = yourNumber.split("");
+      console.log(yourInput);
+      document.getElementById("demo2").innerHTML = yourInput;
+      for (let i = 0; i < yourInput.length; i++) {
+        if (yourInput[i] % 2 == 0) {
+          result.push(yourInput[i]);
+          result.push("-");
+        } else {
+          result.push(yourInput[i]);
+        }
+      }
+      console.log(result);
+      console.log(result.join(""));
+      document.getElementById("demo3").innerHTML = result.join("");
+    </script>
+  </body>
+</html>

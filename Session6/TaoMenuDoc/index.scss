@@ -1,0 +1,53 @@
+.EnglandFootball {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  #menu {
+    ul {
+      a {
+        text-decoration: none;
+        color: #ffffff;
+      }
+      li {
+        height: 30px;
+        list-style: none;
+        background-color: black;
+        width: 150px;
+        position: relative;
+        padding: 0 20px;
+        text-align: left;
+        line-height: 30px;
+        :hover {
+          background-color: red;
+        }
+        ul {
+          top: 0;
+          left: 150px;
+          position: absolute;
+          visibility: hidden;
+          li {
+            height: 30px;
+            list-style: none;
+            background-color: black;
+            width: 150px;
+            padding: 0 20px;
+            text-align: left;
+            line-height: 30px;
+            a {
+              text-decoration: none;
+              color: #ffffff;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.EnglandFootball #menu ul li:hover ul {
+    visibility: visible;
+    z-index: 2; }
+* {
+  padding: 0px;
+  margin: 0px;
+  font-family: auto;
+}

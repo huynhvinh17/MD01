@@ -1,0 +1,192 @@
+* {
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px; }
+
+body {
+  padding: 20px; }
+
+.LayoutFlex_Contaner {
+  padding: 10px;
+  background-color: antiquewhite; }
+  .LayoutFlex_Contaner header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: blueviolet; }
+    .LayoutFlex_Contaner header button {
+      padding: 5px;
+      border-radius: 6px; }
+    .LayoutFlex_Contaner header span {
+      color: white; }
+  .LayoutFlex_Contaner nav {
+    display: flex;
+    justify-content: space-between;
+    margin: 17px 0 0 0; }
+    .LayoutFlex_Contaner nav span {
+      padding: 5px; }
+    .LayoutFlex_Contaner nav hr {
+      width: 85%;
+      margin: 20px 0 0 0;
+      height: 0px; }
+    .LayoutFlex_Contaner nav button {
+      background-color: blueviolet;
+      color: white;
+      padding: 5px;
+      border-radius: 3px;
+      margin-left: 5px;
+      cursor: pointer; }
+  .LayoutFlex_Contaner section {
+    padding: 10px 0;
+    font-size: 25px;
+    background-color: aliceblue;
+    margin-top: 10px; }
+  .LayoutFlex_Contaner footer {
+    padding: 10px;
+    background-color: cadetblue; }
+    .LayoutFlex_Contaner footer p {
+      color: black;
+      text-align: center; }
+
+.Portfolio {
+  margin-top: 80px; }
+  .Portfolio header {
+    padding: 10px;
+    background-color: black; }
+    .Portfolio header h2 {
+      color: white;
+      text-align: center; }
+  .Portfolio nav {
+    padding: 10px;
+    background-color: aqua;
+    display: flex;
+    justify-content: center; }
+    .Portfolio nav ul {
+      list-style: none;
+      overflow: hidden; }
+      .Portfolio nav ul li {
+        float: left;
+        width: 100px; }
+        .Portfolio nav ul li a {
+          text-decoration: none;
+          color: red;
+          font-size: 23px; }
+  .Portfolio section .contaner {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px; }
+    .Portfolio section .contaner h1 {
+      font-size: 40px; }
+    .Portfolio section .contaner p {
+      width: 50%;
+      text-align: center;
+      padding: 20px; }
+  .Portfolio article {
+    margin-top: 20px;
+    background-color: aqua;
+    padding: 20px; }
+    .Portfolio article h2 {
+      text-align: center; }
+    .Portfolio article .Featured {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      flex-wrap: wrap; }
+      .Portfolio article .Featured .image p {
+        text-align: center;
+        padding: 10px; }
+      .Portfolio article .Featured .image img {
+        width: 300px; }
+  .Portfolio .About_me {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px; }
+    .Portfolio .About_me h2 {
+      font-size: 40px; }
+    .Portfolio .About_me p {
+      color: 0;
+      text-align: center;
+      padding: 20px;
+      width: 70%; }
+  .Portfolio footer {
+    background-color: black;
+    padding: 10px; }
+    .Portfolio footer p {
+      color: #ffffff;
+      text-align: center;
+      height: 20px; }
+
+/* For mobile phones: */
+[class*="col-"] {
+  width: 100%; }
+
+.SalesWeb {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: 300px 300px;
+  grid-gap: 99px;
+  padding: 0px 350px;
+  justify-content: center;
+  align-items: center; }
+  .SalesWeb .Sach {
+    height: 150px;
+    width: 300px;
+    background-color: antiquewhite;
+    border-radius: 10px; }
+    .SalesWeb .Sach img {
+      margin: 20px 0 0 40px; }
+    .SalesWeb .Sach .center {
+      text-align: center; }
+      .SalesWeb .Sach .center h2 {
+        margin-bottom: 10px; }
+      .SalesWeb .Sach .center button {
+        background-color: black;
+        color: white;
+        padding: 4px 10px;
+        border-radius: 5px;
+        margin-top: 5px; }
+
+.LayoutGrid {
+  display: grid;
+  grid-template-columns: 300px 300px;
+  grid-template-rows: 150px 150px;
+  align-items: start;
+  height: 900px;
+  width: 300px; }
+  .LayoutGrid .img5 {
+    height: 150px;
+    width: 300px;
+    grid-column: 1;
+    grid-row: 6; }
+  .LayoutGrid .img4 {
+    grid-column: 2;
+    grid-row: 4;
+    height: 150px;
+    width: 300px; }
+  .LayoutGrid .img3 {
+    grid-column: 1/span3;
+    grid-row: 3;
+    height: 150px;
+    width: 300px; }
+  .LayoutGrid .img2 {
+    grid-column: 2;
+    grid-row: 3;
+    height: 150px;
+    width: 300px; }
+  .LayoutGrid .img1 {
+    grid-column: 1/span2;
+    grid-row: 1/span2;
+    height: 150px;
+    width: 300px; }
+  .LayoutGrid img {
+    width: 300px; }
+  .LayoutGrid .button {
+    height: 300px;
+    width: 300px;
+    background-color: red;
+    grid-column: 2;
+    grid-row: 5/span 2; }
+
+/*# sourceMappingURL=style.css.map */

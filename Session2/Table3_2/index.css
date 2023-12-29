@@ -1,0 +1,37 @@
+
+body{
+    padding:0px;
+    margin: 0px;
+    display: inline-block;
+}
+table{
+    border-collapse: collapse;
+    width: 100%;
+    font-family: auto;
+}
+
+th,td{
+    text-align: left;
+    border: 2px solid black;
+    padding: 10px;    
+}
+.Col{
+    column-span: "2";
+}
+.Table3_1{
+    height: 500px;
+    width: 500px;
+    text-align: left;
+    display :inline-block;
+    margin: 30px 0 0 30px;
+    padding: 20px;
+    font-size: 20px;
+
+
+}
+.Table1{
+width: 100%;
+}
+.Table2{
+    width: 100%;
+}

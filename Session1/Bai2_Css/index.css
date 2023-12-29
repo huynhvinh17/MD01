@@ -1,0 +1,29 @@
+header {
+    background-color: black;
+    text-align: center;
+    color: #fff;
+    padding: 22px;
+    font-size: 32px;
+}
+
+body {
+    font-family: auto;
+
+}
+
+li {
+    display: inline-block;
+    margin-left: 20px;
+    padding: 5px;
+}
+
+nav {
+    text-align: center;
+    background: gray;
+
+}
+
+ul {
+    padding: 0px;
+    margin: 0px;
+}

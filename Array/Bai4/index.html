@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Array</title>
+    <h1>Tìm số lớn nhất trong mảng</h1>
+    <p id="demo"></p>
+    <p id="demo2"></p>
+    <p id="demo3"></p>
+  </head>
+
+  <body>
+    <script>
+      let result = [];
+      let text = prompt("nhập vào chuỗi các ký tự");
+      //let text = "Huynh Duc Quang Vinh";
+      let textSplit = text.split("");
+      console.log(textSplit);
+      document.getElementById("demo").innerHTML = textSplit;
+
+      for (let i = 0; i < textSplit.length; i++) {
+        if (textSplit[i] == textSplit[i].toUpperCase()) {
+          result.push(textSplit[i].toLowerCase());
+        } else if (textSplit[i] == textSplit[i].toLowerCase()) {
+          result.push(textSplit[i].toUpperCase());
+        }
+      }
+      console.log(result);
+      document.getElementById("demo2").innerHTML = result.join("");
+      console.log(result.join(""));
+    </script>
+  </body>
+</html>

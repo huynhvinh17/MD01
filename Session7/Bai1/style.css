@@ -1,0 +1,295 @@
+@import url("F:Rikkei_academyModule1ont-awesome-4.7.0scssont-awesome.scss");
+* {
+  padding: vh;
+  margin: vh;
+  box-sizing: bo; }
+
+body {
+  background-color: aliceblue;
+  height: 100%;
+  width: 100%; }
+
+.Contaner {
+  display: flex;
+  flex-direction: column; }
+  .Contaner .Confirm {
+    display: flex;
+    justify-content: center; }
+    .Contaner .Confirm .Contaner1 {
+      padding: 2vh;
+      display: flex;
+      flex-direction: column; }
+      .Contaner .Confirm .Contaner1 h1 {
+        margin-bottom: 2vh; }
+      .Contaner .Confirm .Contaner1 .Yourtour h2 {
+        margin-bottom: 2vh; }
+      .Contaner .Confirm .Contaner1 .Yourtour .Date {
+        margin-bottom: 1vh;
+        border-radius: 1vh;
+        padding: 1vh;
+        background-color: #f4f4f6;
+        width: 50%; }
+        .Contaner .Confirm .Contaner1 .Yourtour .Date input {
+          margin-top: 5px;
+          width: 95%;
+          height: 3vh;
+          border: none;
+          background-color: #f4f4f6;
+          border-radius: 5px; }
+      .Contaner .Confirm .Contaner1 .Yourtour .Traveller {
+        background-color: #f4f4f6;
+        padding: 1vh;
+        border-radius: 1vh;
+        width: 50%; }
+        .Contaner .Confirm .Contaner1 .Yourtour .Traveller button {
+          position: relative;
+          border: none;
+          background: transparent;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          font-size: 15px;
+          width: 100%;
+          height: 100%;
+          border-radius: 5px;
+          padding: 5px; }
+          .Contaner .Confirm .Contaner1 .Yourtour .Traveller button ul {
+            position: absolute;
+            visibility: hidden;
+            border: none;
+            border-radius: 5px;
+            background-color: transparent;
+            top: 3vh;
+            width: 100%; }
+            .Contaner .Confirm .Contaner1 .Yourtour .Traveller button ul li {
+              border: 1px solid black;
+              padding: 1vh;
+              width: 100%;
+              text-align: start;
+              margin-bottom: 1vh;
+              list-style: none; }
+              .Contaner .Confirm .Contaner1 .Yourtour .Traveller button ul li a {
+                text-decoration: none;
+                width: 100%; }
+      .Contaner .Confirm .Contaner1 .CreaditCards {
+        margin-top: 3vh; }
+        .Contaner .Confirm .Contaner1 .CreaditCards .CardContaner {
+          margin-top: 2vh; }
+          .Contaner .Confirm .Contaner1 .CreaditCards .CardContaner .CardNumber input {
+            margin-top: 5px;
+            width: 30%; }
+          .Contaner .Confirm .Contaner1 .CreaditCards .CardContaner .Expiry {
+            width: 30%;
+            margin-top: 1vh;
+            display: flex;
+            justify-content: space-between; }
+            .Contaner .Confirm .Contaner1 .CreaditCards .CardContaner .Expiry .ExpiryDate {
+              display: inline-block; }
+              .Contaner .Confirm .Contaner1 .CreaditCards .CardContaner .Expiry .ExpiryDate input {
+                margin-top: 5px;
+                width: 90%;
+                height: 2vh; }
+            .Contaner .Confirm .Contaner1 .CreaditCards .CardContaner .Expiry .CVC {
+              display: inline-block; }
+              .Contaner .Confirm .Contaner1 .CreaditCards .CardContaner .Expiry .CVC input {
+                margin-top: 5px;
+                width: 100%;
+                height: 2vh; }
+          .Contaner .Confirm .Contaner1 .CreaditCards .CardContaner .Save {
+            margin-top: 2vh; }
+            .Contaner .Confirm .Contaner1 .CreaditCards .CardContaner .Save input#Confirm {
+              background-color: royalblue;
+              border: none;
+              padding: 1vh;
+              border-radius: 3vh;
+              margin-top: 2vh;
+              color: white; }
+    .Contaner .Confirm .Contaner2 {
+      margin: 2vh vh;
+      padding: 4vh;
+      background-color: #ffffff;
+      border-radius: 2vh;
+      color: #d3d5d6;
+      display: flex;
+      flex-direction: column; }
+      .Contaner .Confirm .Contaner2 .PlaceToStay span {
+        font-size: 2vh;
+        font-weight: bold; }
+      .Contaner .Confirm .Contaner2 .PlaceToStay .reviews {
+        margin: 2vh vh; }
+        .Contaner .Confirm .Contaner2 .PlaceToStay .reviews i {
+          color: yellow; }
+      .Contaner .Confirm .Contaner2 .PlaceToStay .img {
+        margin-bottom: 2vh;
+        display: flex;
+        justify-content: left; }
+        .Contaner .Confirm .Contaner2 .PlaceToStay .img img {
+          border-radius: 2vh; }
+      .Contaner .Confirm .Contaner2 .PlaceToStay .check {
+        display: flex;
+        justify-content: space-between;
+        margin: 2vh 0;
+        flex-wrap: wrap; }
+        .Contaner .Confirm .Contaner2 .PlaceToStay .check .checkin {
+          border-right: 1px solid #d3d5d6;
+          padding-right: 10vh; }
+          .Contaner .Confirm .Contaner2 .PlaceToStay .check .checkin input {
+            margin-top: 1vh; }
+        .Contaner .Confirm .Contaner2 .PlaceToStay .check .checkout input {
+          margin-top: 1vh; }
+      .Contaner .Confirm .Contaner2 .PlaceToStay .Guest select {
+        margin-top: 1vh;
+        border: none; }
+      .Contaner .Confirm .Contaner2 .BookedDetail h2 {
+        margin-top: 4vh; }
+      .Contaner .Confirm .Contaner2 .BookedDetail .price {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        height: 15vh; }
+        .Contaner .Confirm .Contaner2 .BookedDetail .price .night {
+          display: flex;
+          justify-content: space-between; }
+        .Contaner .Confirm .Contaner2 .BookedDetail .price .Ocupancy {
+          display: flex;
+          justify-content: space-between; }
+        .Contaner .Confirm .Contaner2 .BookedDetail .price .sevice {
+          display: flex;
+          justify-content: space-between; }
+        .Contaner .Confirm .Contaner2 .BookedDetail .price .Total {
+          display: flex;
+          justify-content: space-between;
+          background-color: antiquewhite; }
+  .Contaner .Contaner3 {
+    background-image: url(bg.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 10vh;
+    margin: 4vh 0; }
+    .Contaner .Contaner3 .GetOurPro {
+      color: white;
+      width: 30%;
+      margin-right: 10vh; }
+      .Contaner .Contaner3 .GetOurPro p {
+        padding-top: 2vh; }
+    .Contaner .Contaner3 .Email_Subcribe {
+      width: 30%;
+      margin-top: 4vh; }
+      .Contaner .Contaner3 .Email_Subcribe .Subcribe {
+        padding: 1vh;
+        background-color: white;
+        display: flex;
+        justify-content: space-between;
+        border-radius: 5px; }
+        .Contaner .Contaner3 .Email_Subcribe .Subcribe input {
+          height: 4vh;
+          border: none;
+          width: 60%; }
+        .Contaner .Contaner3 .Email_Subcribe .Subcribe button {
+          border: none;
+          background-color: black;
+          color: white;
+          padding: 1vh 2vh;
+          border-radius: 5px; }
+  .Contaner .Contaner4 {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin-bottom: 20vh; }
+    .Contaner .Contaner4 a {
+      color: #abadb0;
+      text-decoration: none; }
+    .Contaner .Contaner4 li {
+      list-style: none; }
+    .Contaner .Contaner4 ul {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-top: 1vh;
+      height: 14vh; }
+    .Contaner .Contaner4 .TripGuide {
+      width: 15%;
+      margin-right: 10vh; }
+      .Contaner .Contaner4 .TripGuide p {
+        margin: 1vh 0;
+        color: #abadb0; }
+      .Contaner .Contaner4 .TripGuide .DayNight {
+        display: flex;
+        background-color: white;
+        justify-content: center;
+        padding: 1vh 0;
+        border-radius: 1vh; }
+        .Contaner .Contaner4 .TripGuide .DayNight .Day {
+          cursor: pointer;
+          margin-right: 2vh; }
+        .Contaner .Contaner4 .TripGuide .DayNight .Night {
+          cursor: pointer; }
+    .Contaner .Contaner4 .Services {
+      width: 15%; }
+    .Contaner .Contaner4 .Support {
+      width: 15%; }
+    .Contaner .Contaner4 .Business {
+      width: 15%; }
+
+.Contaner .Confirm .Contaner1 .Yourtour .Traveller button:hover ul {
+  visibility: visible;
+  z-index: 999; }
+
+.Contaner .Confirm .Contaner1 .Yourtour .Traveller button:hover {
+  background-color: red; }
+
+[class*="col-"] {
+  float: left;
+  padding: 15px; }
+
+/* For mobile phones: */
+@media only screen and (max-width: 600px) {
+  [class*="col-"] {
+    width: 100%; } }
+@media only screen and (min-width: 1024px) {
+  /* For desktop: */
+  .col-1 {
+    width: 8.33%; }
+
+  .col-2 {
+    width: 16.66%; }
+
+  .col-3 {
+    width: 25%; }
+
+  .col-4 {
+    width: 33.33%; }
+
+  .col-5 {
+    width: 41.66%; }
+
+  .col-6 {
+    width: 50%; }
+
+  .col-7 {
+    width: 58.33%; }
+
+  .col-8 {
+    width: 66.66%; }
+
+  .col-9 {
+    width: 75%; }
+
+  .col-10 {
+    width: 83.33%; }
+
+  .col-11 {
+    width: 91.66%; }
+
+  .col-12 {
+    width: 100%; } }
+.row::after {
+  content: "";
+  clear: both;
+  display: table; }
+
+/*# sourceMappingURL=style.css.map */

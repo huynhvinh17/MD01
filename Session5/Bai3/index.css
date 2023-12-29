@@ -1,0 +1,59 @@
+body{
+    padding: 0px;
+    margin: 0px;
+    display: inline-block;
+}
+.Bai3{
+    display: block;
+    margin: 100px 0 0 100px;
+    padding: 20px;
+    background-color: aqua;
+    border-radius: 10px;
+}
+.Image_left{
+    display: inline-block;
+    width: 350px;
+    padding: 20px;
+}
+img{
+    height: 400px;
+    display: inline-block
+}
+.right{
+    display: inline-block;
+    vertical-align: top;
+    width: 420px;
+    padding: 20px;
+    position: relative;
+    font-size: 20px;
+}
+.About_us{
+    margin: 0 0 40px 0;
+}
+span{
+    text-transform: uppercase;
+    font-weight: bold;
+}
+hr{
+    height: 4px;
+    width: 30px;
+    position: absolute;
+}
+label{
+    font-weight: bold;
+}
+ul{
+    display: inline-block;
+    list-style-type: none; /* Ẩn dấu đầu dòng mặc định */
+padding: 0px;
+}
+
+  li:before {
+    content: "\2713"; /* Mã Unicode cho dấu tick */
+    display: inline-block;
+    width: 1em; /* Điều chỉnh kích thước của dấu tick */
+    margin-right: 0.5em; /* Khoảng cách giữa dấu tick và nội dung của mục */
+  }
+  .ul_left{
+    margin-right: 20px;
+  }

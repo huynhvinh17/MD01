@@ -1,0 +1,48 @@
+.LayoutFlex_header{
+    background-color: blueviolet;
+    padding: 10px;
+}
+.LayoutFlex_Contaner{
+    padding: 20px;
+}
+body{
+    margin: 0px;
+    padding: 0px;
+}
+.Share{
+    float: right;
+}
+.AddTask{
+    float: right;
+    background-color: blueviolet;
+    color: white;
+    padding: 5px;
+    border-radius: 3px;
+    margin-left: 5px;
+}
+hr {
+    width: 85%;
+    margin: 20px 0 0 0;
+    height: 0px;
+}
+nav {
+    display: flex;
+    margin: 17px 0 0 0;
+}
+footer .LayoutFlex_footer{
+    padding: 10px;
+    background-color: cadetblue;
+}
+section .Shared{
+    padding: 4px;
+    font-size: 25px;
+    background-color: aliceblue;
+    margin-top: 10px;
+}
+p .copy2023{
+    color: black;
+    text-align: center;
+}
+span .New-task{
+    padding: 5px
+}

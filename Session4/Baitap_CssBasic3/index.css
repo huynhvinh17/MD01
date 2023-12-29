@@ -1,0 +1,37 @@
+.body {
+    background-position: center;
+    background-color: aliceblue;
+    margin: 40px;
+    padding: 20px;
+
+}
+
+.Background {
+    background-image:
+        url(https://www.sica.vn/medium/uploads/SP/backdrop-nha-hang-1531301478.jpg);
+    /*  background-color: aliceblue; */
+    padding: 0px;
+    margin: 0px;
+    background-position: center top;
+    background-repeat: no-repeat;
+    /* display: inline-block; */
+    height: 500px;
+}
+
+header {
+    font-size: 39px;
+    font-weight: bold;
+    text-align: center;
+    padding: 30px;
+}
+
+.ABC {
+    color: red;
+    font-weight: bold;
+    /* margin-top: 500px; */
+    display: inline;
+}
+
+.we {
+    display: inline;
+}

@@ -1,0 +1,141 @@
+body {
+  padding: 0px;
+  margin: 0px;
+  display: inline;
+}
+
+.image {
+  height: 300px;
+  width: 500px;
+  background-color: aqua;
+  text-align: left;
+  border-radius: 7px;
+  border: 1px solid rebeccapurple;
+  display: inline-block;
+}
+
+.reform {
+  height: 500px;
+  width: 500px;
+  display: inline-block;
+}
+
+.right {
+  height: 800px;
+  width: 800px;
+  display: inline-block;
+}
+.H {
+  position: relative;
+  height: 100px;
+  width: 200px;
+  display: inline-block;
+  color: aqua;
+  display: flex;
+  background-color: crimson;
+  align-items: center;
+  margin-right: 20px;
+  display: flex;
+  justify-content: center;
+}
+.H span:nth-child(1) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 5px;
+  transition: all 2s linear;
+}
+.H span:nth-child(2) {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 5px;
+  height: 0px;
+  transition: all 2s linear;
+  transition-delay: 2s;
+}
+.H span:nth-child(3) {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 5px;
+  transition: all 2s linear;
+  transition-delay: 4s;
+}
+
+.H span:nth-child(4) {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 5px;
+  height: 0px;
+  transition: all 2s linear;
+  transition-delay: 6s;
+}
+.H:hover span:nth-child(1) {
+  width: 98%;
+  border: 1px solid blue;
+  background-color: blue;
+}
+.H:hover span:nth-child(2) {
+  height: 98%;
+  border: 1px solid blue;
+  background-color: blue;
+}
+.H:hover span:nth-child(3) {
+  width: 98%;
+  border: 1px solid blue;
+  background-color: blue;
+}
+.H:hover span:nth-child(4) {
+  height: 98%;
+  border: 1px solid blue;
+  background-color: blue;
+}
+.H .circles {
+  height: 50px;
+  width: 50px;
+  border: 5px solid yellow;
+  border-radius: 50px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  color: black;
+  border-left: 2px;
+  border-right: 2px;
+  animation: circle1 1s infinite linear;
+}
+@keyframes circle1 {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.h2 {
+  padding-top: 20px;
+}
+img {
+  height: 300px;
+  width: 500px;
+}
+.Climate {
+  display: flex;
+  border-bottom: 1px solid black;
+  margin: 0 0 20px 50px;
+}
+h2 {
+  margin: 0px;
+}
+.Session {
+  height: 700px;
+  width: 1345px;
+  margin: 50px 0 0 50px;
+  font-family: auto;
+  background-color: aqua;
+  padding: 30px;
+  border-radius: 10px;
+}

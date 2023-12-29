@@ -1,0 +1,22 @@
+.signin{
+    padding: 40px;
+    background-color: aqua;
+}
+h1{
+    text-align: center;
+}
+form{
+    padding: 15px;
+    background-color: antiquewhite;
+}
+input#text{
+    margin: 10px 0 20px 0;
+    width: -webkit-fill-available;
+    height: 40px;
+}
+input#submit{
+    background-color: blueviolet;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+}
