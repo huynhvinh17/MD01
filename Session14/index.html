@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Session14</title>
+  </head>
+  <body>
+    <!-- Tạo một cửa hàng
+        Cho người dùng nhập vào sản phẩm cần mua
+        Nếu Sản phẩm có trong giỏ hàng thì tăng sản phẩm lên 1
+        Nếu sản phẩm chưa có thì thêm sản phẩm đó vào giỏ hàng  -->
+
+    <input type="text" , placeholder="Nhap ten san pham" , id="input" />
+    <button onclick="addToCart()">Thêm vào giỏ hàng</button>
+    <script>
+      store = [
+        ["ao", 2000],
+        ["quan", 3000],
+        ["mu", 1000],
+      ];
+      cart = [];
+      function addToCart() {
+        let inputValue = document.getElementById("input").value;
+
+        let check = -1;
+        for (let i = 0; i < store.length; i++) {
+          if (inputValue === store[i][0]) {
+            check = i;
+            break;
+          }
+        }
+        if (check === -1) {
+          //Sản phẩm không có trong giỏ hàng
+          console.log("Không có sản phẩm trong cửa hàng, mời bạn nhập lại");
+          document.getElementById("input").value = "";
+          return;
+        }
+
+        let check1 = -1;
+        for (let j = 0; j < cart.length; j++) {
+          if (cart[j][0] === inputValue) {
+            check1 = j;
+            break;
+          }
+        }
+
+        if (check1 === -1) {
+          cart.push([...store[check], 1]);
+          console.log(`Cảm ơn bạn đã mua sản phẩm ${inputValue}`);
+          console.log(cart);
+          document.getElementById("input").value = "";
+        } else {
+          cart[check1][2] += 1;
+          console.log(`Cảm ơn bạn thêm sản phẩm ${inputValue} vào giở hàng`);
+          console.log(cart);
+          document.getElementById("input").value = "";
+        }
+
+        console.log("Mời bạn tiếp tục mua hàng");
+      }
+    </script>
+  </body>
+</html>

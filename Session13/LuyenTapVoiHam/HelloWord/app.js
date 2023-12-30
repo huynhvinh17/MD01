@@ -1,20 +1,20 @@
-let Array = [1, 2, 3, 4, 5, 6, 5, 4, 2, 3, 4, 2, 3, 4];
-maxcount = 0;
-let newArray = [];
+//let Arr = "hello world";
 
-for (let i = 0; i < Array.length; i++) {
-  let count = 1;
-  for (let j = i + 1; j <= Array.length; j++) {
-    if (Array[i] === Array[j]) {
-      count++;
+let Arr = prompt("Nhập vào câu bất kỳ").toLowerCase();
+let newArr = Arr.split("");
+
+console.log(newArr);
+let count = 0;
+function tanSuat() {
+  for (let i = 0; i < newArr.length; i++) {
+    for (let j = 0; j < newArr.length; j++) {
+      if (newArr[i] === newArr[j]) {
+        count++;
+      }
     }
-  }
-
-  if (count > maxcount) {
-    maxcount = count;
-    newArray = [Array[i]];
-  } else if (count === maxcount) {
-    newArray.push(Array[i]);
+    let soLan = count;
+    console.log(`Ký tự ${newArr[i]} xuất hiện ${soLan} lần`);
+    count = 0;
   }
 }
-console.log(`Phần tử xuất hiện nhiểu nhất:` + newArray.join(","));
+tanSuat();
