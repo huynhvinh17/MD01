@@ -1,26 +1,18 @@
-//Tính tổng các số nguyên tố có trong chuỗi
-
-let number = [4, 5, 2, 8, 9, 15, 16, 18, 17, 2, 3, 5, 11];
-let primeNumber = [];
-let num = 0;
-let sum = 0;
-
-function Prime() {
-  for (let i = 0; i < number.length; i++) {
-    for (let j = 1; j < 1000; j++) {
-      //Hỏi tập hợp số nguyên là gìs
-      if (number[i] % j == 0) {
-        num++;
-      }
+// Tạo hình trái tim bằng JS
+for (let i = 1; i < 7; i++) {
+  for (let j = 1; j < 8; j++) {
+    if (
+      (i == 1 && (j == 2 || j == 3 || j == 5 || j == 6)) ||
+      (i == 2 && (j == 1 || j == 4 || j == 7)) ||
+      (i == 3 && (j == 1 || j == 7)) ||
+      (i == 4 && (j == 2 || j == 6)) ||
+      (i == 5 && (j == 3 || j == 5)) ||
+      (i == 6 && j == 4)
+    ) {
+      document.write("*");
+    } else {
+      document.write(".");
     }
-    if (num == 2) {
-      primeNumber.push(number[i]);
-      sum = sum + number[i];
-    }
-    num = 0;
   }
-  console.log(`Đây là số nguyên tố ${primeNumber}`);
-  console.log(`Tổng số nguyên tố là ${sum}`);
+  document.write("<br>");
 }
-
-Prime();
