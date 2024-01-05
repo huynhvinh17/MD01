@@ -1,0 +1,91 @@
+* {
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px; }
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  body .background .content .title {
+    color: red;
+    justify-content: center;
+    display: flex; }
+  body .background .content .clock {
+    display: flex; }
+    body .background .content .clock .hours {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 70px;
+      width: 50px; }
+      body .background .content .clock .hours label {
+        background-color: red;
+        height: 20px;
+        width: 50px;
+        justify-content: center;
+        display: flex;
+        color: white;
+        border: 1px solid rebeccapurple; }
+      body .background .content .clock .hours .p1 {
+        color: white;
+        background-color: red;
+        height: 50px;
+        width: 50px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        border: 1px solid rebeccapurple; }
+    body .background .content .clock .minutes {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 70px;
+      width: 50px; }
+      body .background .content .clock .minutes .p2 {
+        color: white;
+        background-color: blueviolet;
+        height: 50px;
+        width: 50px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        border: 1px solid rebeccapurple; }
+      body .background .content .clock .minutes label {
+        background-color: blueviolet;
+        height: 20px;
+        width: 50px;
+        justify-content: center;
+        display: flex;
+        color: white;
+        border: 1px solid rebeccapurple; }
+    body .background .content .clock .seconds {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 70px;
+      width: 50px; }
+      body .background .content .clock .seconds .p3 {
+        color: white;
+        background-color: yellowgreen;
+        height: 50px;
+        width: 50px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        border: 1px solid rebeccapurple; }
+      body .background .content .clock .seconds label {
+        background-color: yellowgreen;
+        height: 20px;
+        width: 50px;
+        justify-content: center;
+        display: flex;
+        color: white;
+        border: 1px solid rebeccapurple; }
+  body #demo {
+    height: 20px;
+    width: 150px;
+    display: flex;
+    justify-content: center; }
+
+/*# sourceMappingURL=Style.css.map */

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- Các phương thức làm việc với mảng
+        Giúp code nhanh hơn, gọn gàn hơn
+        ===> Bản chất dùng fỏ có thể xử lý hết vấn đề nhưng dài dòng hơn
+        1. Đầu vào 
+        2. Đầu ra ( Kết quả trả về của hàm)
+
+        1.Filter: lọc kết quả trả về là 1 mảng
+        +Nếu thảo mãn điều kiện mảng chứa phần tử
+        +Không thỏa mãn thì mảng rỗng
+        +Trả về một mảng mới
+        2.map
+            Tạo ra mảng mới
+            Số lượng phần tử trong mảng bằng số lượng phần tử mảng ban đầu
+        
+        3.forEach
+            Không tạo mảng mới
+            không nhận return
+            Tương tác trực tiếp với mảng ban đầu
+        4.Find
+        5.findIndex
+        6.some
+        7.every
+            Tất cả phải thỏa mãn điều kiện
+        8. reduce
+            Hàm dùng để tính toán
+     -->
+
+    <script>
+      let numbers = [5, 6, 7, 8, 9, 1];
+      let result1 = numbers.filter(function (item, index, arr) {
+        return item > 55;
+      });
+      console.log(result1);
+
+      //filter
+      let result2 = numbers.filter((item, index, arr) => {
+        return item > 5;
+      });
+      console.log(result2);
+      //Map
+      let result3 = numbers.map((item, index, arr) => {
+        return 5;
+      });
+      console.log(result3);
+
+      //forEach
+      let result4 = numbers.forEach((item, index, arr) => {
+        numbers[index] = item * 2;
+        return 1;
+      });
+      console.log(result4);
+
+      let students = [
+        {
+          name: "Hoa",
+          id: 11,
+        },
+        {
+          name: "hồng",
+          id: 31,
+        },
+      ];
+
+      let result5 = students.some((item, index, value) => {
+        return index > 6;
+      });
+
+      console.log(result5);
+      let result6 = numbers.reduce((accummulator, itemValue, index) => {
+        return accummulator + itemValue;
+      }, 0);
+      console.log(result6);
+    </script>
+  </body>
+</html>

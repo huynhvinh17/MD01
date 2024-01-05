@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Object</title>
+  </head>
+  <body>
+    <!-- Object : là đối tượng 
+        Thuộc tính:
+        Phương thức:
+        I. Các cách khởi tạo đổi tượng
+        1.let student ={};
+        2.let student = new Object()
+        3.Dùng hàm tạo contructor
+        4.Class ES6
+
+        Lập trình hướng đối tượng
+        1.Đóng gói
+        2.Đa hình
+        3.Trừu tượng
+        4.Kế thừa
+
+        Module4-Typescript
+        CRUD - với Object
+        1-Create - thêm  (Đốitượng.ThuộcTính  , )
+        2.
+    -->
+
+    <script>
+      // Khởi tạo đối tượng sinh viên
+      // let student={};
+      // let student = new Object();
+      let students = {
+        name: "Hoa",
+        age: 25,
+        id: 5,
+        a: 1,
+      };
+      console.log(students.name);
+      //Thêm một thuộc tính là address
+      //C1. student.address ="HN"
+      //C2. student["address"]= "HN";
+      for (const a in students) {
+        console.log(students[a]);
+      }
+
+      students.name = "Hồng";
+      console.log(students);
+      delete students.id;
+      console.log(students);
+
+      let a = 5;
+      let b = a;
+      a = 15;
+      console.log(b);
+    </script>
+  </body>
+</html>
