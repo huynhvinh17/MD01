@@ -27,12 +27,18 @@ while (State) {
           temp1 = j;
         }
       }
-    }
-    if (temp1 == -1) {
-      carts.push(stores[temp]);
-      stores[temp].count -= 1;
-    } else {
-      carts[temp1].count += 1;
+      if (temp1 == -1) {
+        carts.push(stores[temp]);
+        stores[temp].count -= 1;
+        for (let i = 0; i < carts.length; i++) {
+          if ((carts[i].name = stores[temp].name)) {
+            carts[i].count = 1;
+          }
+        }
+      } else {
+        carts[temp1].count += 1;
+        stores[temp].count -= 1;
+      }
     }
     console.log("Sản phẩm trong cửa hàng là", stores);
     console.log("Sản phẩm trong giở hàng là", carts);
@@ -45,24 +51,6 @@ while (State) {
   }
 
   //U(Update)- Hỏi người dùng sản phẩm muốn update trong carts. Nếu tồn tại cho người dùng nhập vào số lượng muốn thay đổi và khi đó count trong stores cũng cập nhật theo. Update xong in lại stores và carts
-  //   else if (input == "U") {
-  //     let cartsUpdate = Number(prompt("Nhập vào vị trí muốn update trong carts"));
-  //     let temp = -1;
-  //     for (let i = 0; i < carts.length; i++) {
-  //       if (i == cartsUpdate - 1) {
-  //         temp = i;
-  //       }
-  //     }
-  //     if (temp == -1) {
-  //       console.log("Vị trí sản phẩm không có trong carts");
-  //     } else {
-  //       let cartsNumber = Number(
-  //         prompt(`Nhập vào số lượng muốn thay đổi tại vị trí ${temp}`)
-  //       );
-  //       carts[temp].count = cartsNumber;
-  //     }
-  //     console.log("Sản phẩm trong carts sau khi update", carts);
-  //   }
   else if (input == "U") {
     let inputU = prompt("Nhập vào tên sản phẩm muốn update");
     let temp = -1;
@@ -78,14 +66,7 @@ while (State) {
       carts[temp].count = countNumber;
     }
     console.log("Sản phẩm trong giở hàng là", carts);
-  }
-
-  //   else if (input == "D") {
-  //     let deleteCarts = Number(prompt("Vị trí món hàng muốn xóa"));
-  //     carts.splice(deleteCarts - 1, 1);
-  //     console.log(`Giỏ hàng sau khi xóa là  : ${carts}`);
-  //   }
-  else if (input == "D") {
+  } else if (input == "D") {
     let inputD = prompt("Nhập vào tên sản phẩm muốn xóa");
     let temp = -1;
     for (let i = 0; i < carts.length; i++) {
