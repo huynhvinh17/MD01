@@ -1,0 +1,32 @@
+body {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box; }
+  body .imgGallery {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    width: 500px; }
+    body .imgGallery #myImg {
+      display: block;
+      width: 500px;
+      height: 500px; }
+    body .imgGallery button {
+      height: 100px;
+      cursor: pointer;
+      width: 500px; }
+    body .imgGallery .imgGalery {
+      overflow: hidden;
+      white-space: nowrap;
+      width: 100%; }
+      body .imgGallery .imgGalery #viewImgList {
+        display: inline-block;
+        transition: transform 0.3s ease-in-out;
+        white-space: nowrap; }
+        body .imgGallery .imgGalery #viewImgList img {
+          width: 100px;
+          height: 100px;
+          border-radius: 5px;
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); }
+
+/*# sourceMappingURL=style.css.map */

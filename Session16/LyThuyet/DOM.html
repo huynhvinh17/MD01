@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .heading {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+        DOM: Document object model: Mô hình tài liệu đối tượng
+        Khi trang web được tải lên thì trình duyệt sẽ tạo ra một document object model(DOM)
+        DOM: Gồm 3 thành phẩn chính
+        1.element(Thẻ h1, h2, div, p, a, img...)
+        2.arttribute(Class,id,src,href...)
+        3.text(nội dung)
+
+        Công dụng của DOM
+        JavaScript có thể thay đổi tất cả các thành phần HTML trong trang
+        JavaScript có thể thay đổi tất cả thuộc tính HTML trong trang
+        JavaScript có thể thay đổi tất cả các kiểu CSS trong trang
+        JavaScript có thể xóa các thành phần và thuộc tính HTML hiện có
+        JavaScript có thể thêm các thành phần và thuộc tính HTML mới
+        JavaScript có thể phản ứng với tất cả các sự kiện HTML hiện có trong trang
+        JavaScript có thể tạo các sự kiện HTML mới trong trang
+
+        ***************************
+        Cách để lấy element trong DOM
+        1.Lấy theo ID
+        document.getElementByID("tên id")
+        ==>trả về 1 đối tượng
+        
+        2.Lấy theo class
+        document.getElementsByClassName("")
+        (Từ khóa class là dùng để khai báo lớp đối tượng)
+        Trả về 1 HTML colletion dạng mảng
+        
+        3.Lấy theo tên thẻ
+        trả về 1 html collection dạng mảng
+
+        4.Lấy theo querySelector
+        Bộ chọn selector
+        trả về 1 đối tượng
+
+        5.Lấy theo querySelectorAll
+        trả về 1 Node-List dạng mảng
+        Có thể lấy theo index
+        Có thể dùng for để duyệt
+     -->
+
+    <h1 class="title">Thẻ h1 thứ nhất</h1>
+    <h1 class="title2">Thẻ h1 thứ hai</h1>
+    <h2 class="title">Lấy theo class</h2>
+    <p id="idElement">Thẻ p thứ 1</p>
+    <p id="idElement1">Thẻ p thứ 2</p>
+    <p id="selector">Thẻ p lấy theo query selector</p>
+    <div>
+      <p>thẻ p thứ 3</p>
+    </div>
+
+    <button onclick="changeColor()">click</button>
+    <a href=""></a>
+    <img src="" alt="" />
+    <script>
+      let element;
+    </script>
+  </body>
+</html>

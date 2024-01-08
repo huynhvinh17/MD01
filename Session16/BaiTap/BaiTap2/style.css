@@ -1,0 +1,39 @@
+.keyboardForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  .keyboardForm #keyboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+    .keyboardForm #keyboard .row {
+      display: flex;
+      flex-direction: row;
+      align-items: center; }
+      .keyboardForm #keyboard .row .key {
+        width: 40px;
+        height: 40px;
+        background-color: lightgray;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        border-radius: 5px; }
+    .keyboardForm #keyboard .space {
+      width: 200px;
+      height: 40px;
+      background-color: lightgray;
+      cursor: pointer;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+    .keyboardForm #keyboard .deleteKey {
+      width: 100px;
+      height: 40px;
+      background-color: lightgray;
+      cursor: pointer;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center; }

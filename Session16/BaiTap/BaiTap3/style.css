@@ -1,0 +1,24 @@
+body {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  width: 80%; }
+
+.toDoList {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+  .toDoList ul {
+    list-style-type: none; }
+    .toDoList ul li {
+      margin-bottom: 5px;
+      position: relative;
+      left: -100px; }
+      .toDoList ul li .editButton {
+        position: absolute;
+        left: 100px; }
+      .toDoList ul li .deleteButton {
+        position: absolute;
+        left: 140px; }
+
+/*# sourceMappingURL=style.css.map */

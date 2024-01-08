@@ -1,9 +1,9 @@
 let State = true;
 let stores = [
-  { id: 1, name: "iphone5", count: 100 },
-  { id: 2, name: "iphone6", count: 100 },
-  { id: 3, name: "iphone7", count: 100 },
-  { id: 4, name: "iphone8", count: 100 },
+  { id: 1, name: "iphone5", count: 100, price: 2000 },
+  { id: 2, name: "iphone6", count: 100, price: 3000 },
+  { id: 3, name: "iphone7", count: 100, price: 4000 },
+  { id: 4, name: "iphone8", count: 100, price: 5000 },
 ];
 let carts = [];
 while (State) {
@@ -21,79 +21,81 @@ while (State) {
     State = false;
   }
 }
+
+//C(Create) – Cho người dùng nhập vào tên sản phẩm muốn mua. Nếu có thêm chúng vào carts khi đó count trong stores của sản phẩn đó giảm đi 1
 function createCarts() {
-  //C(Create) – Cho người dùng nhập vào tên sản phẩm muốn mua. Nếu có thêm chúng vào carts khi đó count trong stores của sản phẩn đó giảm đi 1
   let inputC = prompt("Nhập vào tên sản phẩm muốn mua");
-  let temp = -1;
-  let temp1 = -1;
-  for (let i = 0; i < stores.length; i++) {
-    if (stores[i].name == inputC) {
-      temp = i;
-    }
-  }
-  if (temp === -1) {
-    console.log("Sản phẩm bạn muốn mua không có trong cửa hàng");
-  }
-  if (temp !== -1) {
-    for (let j = 0; j < carts.length; j++) {
-      if (carts[j].name == inputC) {
-        temp1 = j;
-      }
-    }
-    if (temp1 == -1) {
-      carts.push(stores[temp]);
-      stores[temp].count = stores[temp].count - 1;
-      for (let i = 0; i < carts.length; i++) {
-        if (carts[i].name === stores[temp].name) {
-          carts[i].count = 1;
-        }
-      }
-      console.log("Sản phẩm trong cửa hàng là", stores);
-      console.log("Sản phẩm trong giở hàng là", carts);
+  let product = stores.find((s) => s.name === inputC);
+  if (product) {
+    if (isProductInCart(inputC)) {
+      increaseCount(inputC);
+      decreaseCount(inputC);
     } else {
-      carts[temp1].count = carts[temp1].count + 1;
-      stores[temp].count = stores[temp].count - 1;
-      console.log("Sản phẩm trong cửa hàng là", stores);
-      console.log("Sản phẩm trong giở hàng là", carts);
+      addToCartArr(product);
+      decreaseCount(inputC);
     }
-  }
-}
-
-function readCarts() {
-  //R(Read) – In ra toàn bộ các sản phẩm trong stores và carts
-  console.log("Sản phẩm trong store", stores);
-  console.log("Sản phẩm trong carts", carts);
-}
-
-function updateCarts() {
-  let inputU = prompt("Nhập vào tên sản phẩm muốn update");
-  let temp = -1;
-  for (let i = 0; i < carts.length; i++) {
-    if (carts[i].name == inputU) {
-      temp = i;
-    }
-  }
-  if (temp == -1) {
-    console.log("Sản phẩm bạn muốn update không có trong cửa hàng");
+    console.log("product", carts);
+    console.log("product", stores);
   } else {
-    let countNumber = Number(prompt("Nhập vào số lượng sản phẩm"));
-    carts[temp].count = countNumber;
+    console.log("product not found");
   }
-  console.log("Sản phẩm trong giở hàng là", carts);
 }
 
+//Xóa sản phẩm có trong giỏ hàng
 function deleteCarts() {
-  let inputD = prompt("Nhập vào tên sản phẩm muốn xóa");
-  let temp = -1;
-  for (let i = 0; i < carts.length; i++) {
-    if (carts[i].name == inputD) {
-      temp = i;
-    }
-  }
-  if (temp == -1) {
-    console.log("Sản phẩm bạn muốn xóa không có trong cửa hàng");
+  let deleteProduct = prompt("Nhập vào tên sản phẩm muốn xóa");
+  let product1 = carts.find((s) => s.name === deleteProduct);
+  let itemIndex = carts.findIndex((s) => s.name == deleteProduct);
+  if (product1) {
+    carts.splice(itemIndex, 1);
+    console.log("product", carts);
   } else {
-    carts.splice(temp, 1);
-    console.log("Sản phẩm trong giở hàng sau khi xóa là", carts);
+    console.log("product not found");
   }
+}
+
+//Update sản phẩm có trong giỏ hàng
+function updateCarts() {
+  let updateProduct = prompt("Nhập vào tên sản phẩm muốn update");
+  let product1 = carts.find((s) => s.name == updateProduct);
+  if (product1) {
+    let updateProductNumber = Number(prompt("Nhập vào số lượng muốn update"));
+    productNumber.count = updateProductNumber;
+    console.log("product", carts);
+  }
+}
+
+//Kiểm tra sản phẩm có trong giỏ hàng hay không
+function isProductInCart(inputC) {
+  return carts.some((item) => item.name == inputC);
+}
+
+//Kiểm tra sản phẩm có trong store
+function isProductInStores(inputC) {
+  return stores.some((item) => item.name == inputC);
+}
+
+//Tăng số lượng sản phẩm đã có trong giỏ hàng
+function increaseCount(inputC) {
+  let item = carts.find((item) => item.name == inputC);
+  item.count++;
+}
+
+//Thêm sản phẩm vào giỏ hàng nếu sản phẩm chưa có trong giỏ hàng
+function addToCartArr(product) {
+  carts.push({ ...product, count: 1 });
+}
+
+//Giảm số lượng sản phẩm có trong store
+function decreaseCount(inputC) {
+  let item = stores.find((item) => item.name == inputC);
+  item.count--;
+}
+
+//Tính tổng giá trị hóa đơn dựa trên giỏ hàng
+function caculateBill() {
+  let totalBill = carts.reduce((tolal, item) => {
+    tolal + item.price * item.count, 0;
+  });
+  document.getElementById("demo").innerHTML = `Total Bill: ${totalBill}`;
 }
