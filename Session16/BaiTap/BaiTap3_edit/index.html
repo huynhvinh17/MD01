@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .ToDoList {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .success {
+        text-decoration: line-through;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="ToDoList">
+      <p>My todolist</p>
+      <div>
+        <input
+          type="text"
+          class="inputToDoList"
+          id="inputToDoList"
+          placeholder="Title"
+        />
+        <button class="addToDoList" id="addToDoList" onclick="newJob()">
+          Thêm
+        </button>
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th>Trạng Thái</th>
+          <th>Tên công việc</th>
+          <th>Xóa</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    <script>
+      /* Bước 1: Tạo giao diện nhấn nút thêm để hiển thị công việc bên dưới
+                            Bước 2: Tạo đối tượng để lưu thông tin công việc
+                            Tên công việc
+                            id: công việc: Để tiện việc truy xuất id để thêm, sửa xóa công việc
+                            Bước 3: Tạo 1 mảng lưu thông tin tất cả các đối tượng
+                            Bước 4: Khi nhấn nút add thì push thông tin của đối tượng vào mảng rồi hiển thị */
+
+      //Tạo function sinh ra id ngẫu nhiên
+      function uuid() {
+        return Math.floor(
+          Math.random() * 9999999 + new Date().getMilliseconds()
+        );
+      }
+      /* math.random(): tạo 1 số ngẫu nhiên từ 0<=x<1
+                            *99999999 sẽ tạo ra một số ngẫu nhiên
+                            math.floor làm tròn xuống thành số nguyên
+                            new Date().getMilliseconds(): Lấy thời gian tính bằng milisecond (12:14:45,129) = 129
+                          */
+
+      //Tạo mảng chưa thông tin tất cả công việc khi nhập vào
+      let jobs = [];
+
+      //Khởi tạo function công việc
+
+      function newJob() {
+        console.log("chạy vào hàm job");
+        let job = document.getElementById("inputToDoList").value;
+        if (job == "") {
+          return;
+        }
+        console.log("Hiển thị công việc", job);
+
+        //Tạo đối tượng để lưu thông tin công việc
+        let objInfo = {
+          name: job,
+          id: uuid(),
+          status: false,
+        };
+
+        jobs.push(objInfo);
+        document.getElementById("inputToDoList").value = "";
+        renderJob();
+      }
+
+      //sau khi có danh sách công việc rồi thì đem đi hiển thị
+
+      function renderJob() {
+        console.log("Danh sách công việc hiển thị", jobs);
+        let html = "";
+
+        for (let i = 0; i < jobs.length; i++) {
+          if (jobs[i].status) {
+            td_name = `
+                       <td>
+                      <input type="checkbox" checked onclick=clickJob(${jobs[i].id})>
+                       </td>
+                      <td class="success">${jobs[i].name}</td>
+                       `;
+          } else {
+            td_name = `
+                      <td>
+                      <input type="checkbox" onclick=clickJob(${jobs[i].id})>
+                       </td>
+                      <td>${jobs[i].name}</td>
+                       
+                         `;
+          }
+          html += `
+                        <tr>
+                             <td>${i + 1}</td>
+                             ${td_name}
+                             <td onclick=deleteJob(${jobs[i].id})>x</td>
+                        </tr>
+                        `;
+        }
+        document.getElementById("tbody").innerHTML = html;
+      }
+
+      //Viết hàm xóa công việc
+
+      function deleteJob(id) {
+        console.log("Xóa công việc", id);
+        let confirmJob = confirm("Bạn có muốn xóa hay không");
+        if (!confirmJob) {
+          return;
+        }
+        //tìm vị trí muốn xóa
+        let index = jobs.findIndex((item) => {
+          return item.id == id;
+        });
+
+        jobs.splice(index, 1);
+        console.log("Mảng sau khi xóa", jobs);
+        renderJob();
+      }
+
+      //Viết hàm khi tích vào thì gạch bỏ công việc đi
+      function clickJob(click_id) {
+        console.log("Gạch bỏ công việc", click_id);
+        for (let i = 0; i < jobs.length; i++) {
+          if (jobs[i].id == click_id) {
+            jobs[i].status = !jobs[i].status;
+            console.log(jobs);
+            renderJob();
+            break;
+          }
+        }
+      }
+
+      //Viết khi enter thì thêm công việc
+      document
+        .getElementsByTagName("body")[0]
+        .addEventListener("keypress", (event) => {
+          if (event.keyCode == 13) {
+            newJob();
+          }
+        });
+    </script>
+  </body>
+</html>
