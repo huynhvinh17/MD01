@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>Storing data in the browser</p>
+
+    <!-- 
+        storing data in the browser
+        (Lưu trữ dữ liệu phía client -browser)
+        1.localstorage
+        -Dữ lieuẹ khi lưu sẽ không bị mất đi (F5 đóng tab, tắt máy)
+        -Dung lượng dữ liệu lưu được 5-10mb
+        1MB=1024kb
+
+        2.Sessionstorage
+        -Phiên làm việc tức là dữ liệu sẽ bị mất đi khi đóng tab
+        -Dung lượng tầm 3-5mb
+
+        3.cookie
+        -Dung lượng tầm 3-5kb
+        -Thương lưu token từ server trả về để duy trì đăng nhập, thực hiện tác vụ
+        -Có thể set thời gian sống cho nó
+
+     -->
+
+    <script>
+      //Lưu trữ dữ liệu
+      //Lưu là set, lấy là get
+      localStorage.setItem("chung", "Tuan Anh");
+      localStorage.setItem("Tôi", "5");
+      let result = localStorage.removeItem("chung");
+
+      localStorage.removeItem("chung");
+
+      //Xóa hết key dùng clear
+      //localStorage.clear();
+      //   sessionStorage.setItem("Chung","5")
+
+      // Khi lưu dữ liệu dạng arr hoặc obj thì phải chuyển sang dạng JSON để lưu
+
+      let obj = {
+        name: "chung",
+      };
+      //Lưu obj, arr
+      localStorage.setItem("student", JSON.stringify(obj));
+
+      //Lấy trên local về
+      JSON.parse(obj);
+
+      //Khi làm đăng kí thì email phải là duy nhất
+      //window.location.href="./login"
+      /*
+      Nếu trùng thì chuyển sang trang đăng nhập
+      Không thì mật khẩu và tài khoản không đúng
+      */
+    </script>
+  </body>
+</html>

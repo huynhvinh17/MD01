@@ -1,0 +1,37 @@
+body {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+  .imgGallery {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    #myImg {
+      display: block;
+      width: 500px;
+      height: 500px;
+    }
+    button {
+      height: 100px;
+      cursor: pointer;
+      width: 500px;
+    }
+    .imgGalery {
+      overflow: hidden;
+      white-space: nowrap;
+      width: 100%;
+      #viewImgList {
+        display: inline-block;
+        transition: transform 0.3s ease-in-out;
+        white-space: nowrap;
+        img {
+          width: 100px;
+          height: 100px;
+          border-radius: 5px;
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+      }
+    }
+  }
+}

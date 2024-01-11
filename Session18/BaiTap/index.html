@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng kí</title>
+  </head>
+  <body>
+    <p>Đăng kí</p>
+    <input type="text" placeholder="Tên đăng nhập" id="name" /><br />
+    <input type="text" placeholder="Email" id="email" /><br />
+    <input type="text" placeholder="Mật khẩu" id="password" /><br />
+    <input
+      type="text"
+      placeholder="Nhập lại mật khẩu"
+      id="confirmPassword"
+    /><br />
+    <p id="notification"></p>
+    <button onclick="signIn()" style="cursor: pointer" type="button">
+      Đăng kí
+    </button>
+    <script>
+      /*
+        Tạo 1 mảng lưu thông tin đăng kí xác định đăng kí tài khoản sẽ có bao nhiêu field
+        userName:
+        email:
+        password:
+        ConfirmPassword
+        Push value vào
+        giá trị email là giá trị duy nhất
+         */
+      let users = JSON.parse(localStorage.getItem("users")) || [];
+
+      function signIn() {
+        let name = document.getElementById("name").value;
+        let password = document.getElementById("password").value;
+        let confirmPassword = document.getElementById("confirmPassword").value;
+        let email = document.getElementById("email").value;
+        let user = {
+          userName: name,
+          email: email,
+          password: password,
+        };
+        if (checkPassword()) {
+          resetInput();
+          document.getElementById("notification").innerHTML =
+            "Mật khẩu không khớp, vui lòng kiểm tra lại";
+          return;
+        }
+        if (checkEmail()) {
+          document.getElementById("notification").innerHTML =
+            "Email đã được đăng kí, vui lòng nhập lại emai khác";
+          resetInput();
+          return;
+        }
+        users.push(user);
+        localStorage.setItem("users", JSON.stringify(users));
+        console.log(users);
+        document.getElementById("notification").innerHTML = "";
+        document.getElementById("notification").innerHTML =
+          "chúc mừng bạn đã đăng kí thành công";
+        resetInput();
+        window.setTimeout(login, 3000);
+      }
+
+      //let obj=[{email:"a@gmail.com"},{email:"b@gmail.com"}]
+      //window.location.href="./login"
+      /*
+      Nếu trùng thì chuyển sang trang đăng nhập
+      Không thì mật khẩu và tài khoản không đúng
+      */
+
+      function checkPassword() {
+        let a = document.getElementById("confirmPassword").value;
+        let b = document.getElementById("password").value;
+        return a !== b;
+      }
+      function checkEmail() {
+        let a = document.getElementById("email").value;
+        for (let i = 0; i < users.length; i++) {
+          if (users[i].email == a) {
+            return true;
+          }
+        }
+      }
+      function resetInput() {
+        document.getElementById("name").value = "";
+        document.getElementById("email").value = "";
+        document.getElementById("password").value = "";
+        document.getElementById("confirmPassword").value = "";
+      }
+      function login() {
+        window.location.href = "./login.html";
+      }
+    </script>
+  </body>
+</html>

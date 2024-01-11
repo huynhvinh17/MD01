@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Đăng nhập</title>
+  </head>
+  <body>
+    <p>Đăng nhập</p>
+    <input type="text" placeholder="email" id="email" /><br />
+    <input type="text" placeholder="mật khẩu" id="password" /><br />
+    <p id="notification"></p>
+    <button id="signIn" onclick="signIn()">Đăng nhập</button>
+    <script>
+      let users = JSON.parse(localStorage.getItem("users")) || [];
+      function signIn() {
+        if (!check()) {
+          document.getElementById("notification").innerHTML =
+            "tài khoản hoặc mật khẩu chưa đúng, vui lòng nhập lại";
+          resetInput();
+          return;
+        }
+      }
+      function check() {
+        console.log(users);
+        let a = document.getElementById("email").value;
+        let b = document.getElementById("password").value;
+        for (let i = 0; i < users.length; i++) {
+          if (users[i].email == a && users[i].password == b) {
+            document.getElementById("notification").innerHTML =
+              "Chúc mừng bạn đã đăng nhập thành công";
+            resetInput();
+            window.setTimeout(login(), 3000);
+            return true;
+          }
+        }
+      }
+      function login() {
+        window.location.href = "./home.html";
+      }
+      function resetInput() {
+        document.getElementById("email").value = "";
+        document.getElementById("password").value = "";
+      }
+    </script>
+  </body>
+</html>

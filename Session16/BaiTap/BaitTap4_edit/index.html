@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+      }
+      .gallery-img {
+        height: 500px;
+        width: 500px;
+        border: 20px solid black;
+        background-color: black;
+      }
+      .cross-img {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+      }
+      .cross-img img {
+        height: 80px;
+        width: 80px;
+
+        border-radius: 3px;
+      }
+      .cross-img img:hover,
+      .btn:hover {
+        scale: 1.2;
+        cursor: pointer;
+      }
+      .cross-img {
+        gap: 12px;
+        margin-top: 10px;
+        background-color: black;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+
+      .show-img img {
+        height: 400px;
+        width: 500px;
+        border-radius: 5px;
+      }
+      .btn {
+        background-color: black;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <div class="gallery-img">
+        <div class="show-img">
+          <img
+            class="showImg"
+            src="../BaitTap4_edit/background/234201038_214443663953928_3226951600001654249_n.jpg"
+            alt=""
+          />
+        </div>
+        <div class="cross-img"></div>
+      </div>
+    </div>
+
+    <script>
+      let flag = 0;
+      let imgArr = [
+        "./background/234201038_214443663953928_3226951600001654249_n.jpg",
+        "./background/240399941_225561439508817_5234028518511020016_n.jpg",
+        "./background/240606024_228203049244656_2339503258416495979_n.jpg",
+        "./background/241036113_230491779015783_8897649375041817343_n.jpg",
+        "./background/244693042_252395996825361_4005173887427778637_n.jpg",
+        "./background/244760694_253628806702080_8437346133727194840_n.jpg",
+        "./background/247205177_260626646002296_758563417939076727_n.jpg",
+        "./background/245379490_256234013108226_7905811417232224949_n.jpg",
+      ];
+
+      function renderImg() {
+        let html = "";
+        for (let i = 0; i < 5; i++) {
+          html += `
+                 <img onclick=showImg(${i}) src="${imgArr[i]}" alt="">
+                `;
+        }
+        document.getElementsByClassName("cross-img")[0].innerHTML = `
+        <span onclick=preImg() class="material-symbols-outlined btn">arrow_back_ios_new</span>
+          ${html}
+          <span onclick=nextImg() class="material-symbols-outlined btn"> arrow_forward_ios </span>
+        `;
+      }
+      renderImg();
+      function showImg(index) {
+        console.log("index", index);
+        document.getElementsByClassName("showImg")[0].src = imgArr[index];
+        flag = index;
+      }
+
+      function preImg() {
+        flag--;
+        if (flag == -1) {
+          return (flag = imgArr.length);
+        }
+        flag = flag % imgArr.length;
+        console.log("pre", flag);
+        document.getElementsByClassName("showImg")[0].src = imgArr[flag];
+        let result = imgArr.pop();
+        imgArr.unshift(result);
+        flag++;
+        flag = flag % imgArr.length;
+        renderImg();
+      }
+      function nextImg() {
+        flag++;
+        flag = flag % imgArr.length;
+        console.log("next", flag);
+        document.getElementsByClassName("showImg")[0].src = imgArr[flag];
+        let result = imgArr.shift();
+        imgArr.push(result);
+        flag--;
+        if (flag == -1) {
+          return (flag = imgArr.length);
+        }
+        flag = flag % imgArr.length;
+        renderImg();
+      }
+    </script>
+  </body>
+</html>
