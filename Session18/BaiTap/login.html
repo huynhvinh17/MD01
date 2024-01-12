@@ -11,10 +11,11 @@
     <input type="text" placeholder="email" id="email" /><br />
     <input type="text" placeholder="mật khẩu" id="password" /><br />
     <p id="notification"></p>
-    <button id="signIn" onclick="signIn()">Đăng nhập</button>
+    <button id="logIn" onclick="logIn()">Đăng nhập</button>
     <script>
       let users = JSON.parse(localStorage.getItem("users")) || [];
-      function signIn() {
+      let userLogIn = [];
+      function logIn() {
         if (!check()) {
           document.getElementById("notification").innerHTML =
             "tài khoản hoặc mật khẩu chưa đúng, vui lòng nhập lại";
@@ -24,25 +25,43 @@
       }
       function check() {
         console.log(users);
-        let a = document.getElementById("email").value;
-        let b = document.getElementById("password").value;
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+        let user = {
+          email: email,
+          password: email,
+        };
         for (let i = 0; i < users.length; i++) {
-          if (users[i].email == a && users[i].password == b) {
-            document.getElementById("notification").innerHTML =
-              "Chúc mừng bạn đã đăng nhập thành công";
+          if (users[i].email == email && users[i].password == password) {
+            document.getElementById(
+              "notification"
+            ).innerHTML = `Chúc mừng người dùng <b>${users[i].userName}</b>  đã đăng nhập thành công`;
+            userLogIn.push(user);
+            sessionStorage.setItem("userName", JSON.stringify(userLogIn));
+            console.log(userLogIn);
+            logined();
             resetInput();
-            window.setTimeout(login(), 3000);
             return true;
           }
         }
       }
-      function login() {
+      function logined() {
         window.location.href = "./home.html";
       }
       function resetInput() {
         document.getElementById("email").value = "";
         document.getElementById("password").value = "";
       }
+      function enterPress() {
+        document
+          .getElementsByTagName("body")[0]
+          .addEventListener("keypress", (event) => {
+            if (event.keyCode == 13) {
+              logIn();
+            }
+          });
+      }
+      enterPress();
     </script>
   </body>
 </html>

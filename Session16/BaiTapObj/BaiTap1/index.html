@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BaiTapWeb1</title>
+    <style>
+      #myCanvas {
+        border: 1px solid black;
+        width: 500px;
+        height: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Xây dựng object lớp mô tả hình chữ nhật</h1>
+    <canvas id="myCanvas"></canvas><br />
+    <input type="text" placeholder="Nhập vào chiều dai" id="chieuDai" />
+    <input type="text" placeholder="Nhập vào chiều rộng" id="chieuRong" />
+    <button class="result" onclick="inputValue()">kết quả</button><br />
+    <span class="dienTichClass">Diện tích</span><br />
+    <span class="chuViClass">Chu vi</span>
+    <script>
+      let rectangle = [];
+      function inputValue() {
+        let a = Number(document.getElementById("chieuDai").value);
+        let b = Number(document.getElementById("chieuRong").value);
+        let rectangleObj = {
+          Dai: a,
+          Rong: b,
+        };
+        rectangle.shift();
+        rectangle.push(rectangleObj);
+
+        console.log("Thông số hình chữ nhật", rectangle);
+        dienTich();
+        chuVi();
+        canvasWrite(a, b);
+      }
+
+      function canvasWrite(a, b) {
+        let c = document.getElementById("myCanvas");
+        let ctx = c.getContext("2d");
+        ctx.beginPath();
+        ctx.moveTo(10, 10);
+        ctx.lineTo(10, b);
+        ctx.lineTo(a, b);
+        ctx.lineTo(a, 10);
+        ctx.lineTo(10, 10);
+        ctx.strokeStyle = "red";
+        ctx.stroke();
+      }
+
+      function dienTich() {
+        let a = rectangle[0].Dai * rectangle[0].Rong;
+        document.getElementsByClassName(
+          "dienTichClass"
+        )[0].innerHTML = `Diện tích là: ${a}`;
+      }
+      function chuVi() {
+        let b = (rectangle[0].Dai + rectangle[0].Rong) * 2;
+        document.getElementsByClassName(
+          "chuViClass"
+        )[0].innerHTML = `Chu vi là: ${b}`;
+      }
+      function keyPress() {
+        document
+          .getElementsByTagName("body")[0]
+          .addEventListener("keypress", (event) => {
+            if (event.keyCode == 13) {
+              inputValue();
+            }
+          });
+      }
+      keyPress();
+    </script>
+  </body>
+</html>

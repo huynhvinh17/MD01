@@ -7,14 +7,14 @@
     <title>TẠO ĐỒNG HỒ ĐIỆN TỬ</title>
     <link rel="stylesheet" href="./Style.css" />
   </head>
-  <body>
+  <body id="myBody">
     <div class="background">
       <div class="content">
         <p class="title">Thời gian bây giờ là</p>
         <div class="clock">
           <div class="hours">
             <p class="p1" id="hours">00</p>
-            <label for="p1">GIỜ</label>
+            <label for="1">GIỜ</label>
           </div>
           <div class="minutes">
             <p class="p2" id="minutes">00</p>
@@ -28,6 +28,93 @@
       </div>
     </div>
     <p id="demo">a</p>
-    <script src="./index.js"></script>
+    <video id="video1">
+      <source
+        src="./audio/Shadowing Mỗi Ngày - Phần 1 -trung cấp-.mp4"
+        type="video/mp4"
+      />
+    </video>
+    <button onclick="playPause()">Play/Pause</button>
+    <script>
+      let videoArr = [
+        "./audio/Shadowing Mỗi Ngày - Phần 1 -trung cấp-.mp4",
+        "./audio/Shadowing Mỗi Ngày - Phần 2 -trung cấp-.mp4",
+        "./audio/Shadowing Mỗi Ngày - Phần 3 -trung cấp-.mp4",
+        "./audio/Shadowing Mỗi Ngày - Phần 4 -trung cấp-.mp4",
+        "./audio/Shadowing Mỗi Ngày - Phần 5 -trung cấp-.mp4",
+        "./audio/Shadowing Mỗi Ngày - Phần 6 -trung cấp-.mp4",
+      ];
+      let backgroundImageArr = [
+        "./background/234201038_214443663953928_3226951600001654249_n.jpg",
+        "./background/240399941_225561439508817_5234028518511020016_n.jpg",
+        "./background/240606024_228203049244656_2339503258416495979_n.jpg",
+        "./background/277998887_358614909536802_7308630635459416954_n.jpg",
+      ];
+      function myTimer() {
+        const d = new Date();
+        document.getElementById("demo").innerHTML = d.toLocaleTimeString();
+      }
+      setInterval(myTimer, 1000);
+
+      function myHours() {
+        const d = new Date();
+        document.getElementById("hours").innerHTML = d.getHours();
+      }
+      setInterval(myHours, 1000);
+
+      function myMinutes() {
+        const d = new Date();
+        document.getElementById("minutes").innerHTML = d.getMinutes();
+      }
+      setInterval(myMinutes, 1000);
+
+      let imageChange = 0;
+      let imageSecond = 0;
+      let video = 0;
+      let videoSecond = 0;
+      function mySeconds() {
+        const d = new Date();
+        document.getElementById("seconds").innerHTML = d.getSeconds();
+        backgroundChange();
+        videoChange();
+      }
+
+      setInterval(mySeconds, 1000);
+
+      document.body.style.backgroundImage = `url(${backgroundImageArr[2]})`;
+      function playPause() {
+        let myVideo = document.getElementById("video1");
+        if (myVideo.paused) {
+          myVideo.play();
+        } else {
+          myVideo.pause();
+        }
+      }
+      function backgroundChange() {
+        imageSecond++;
+        if (imageSecond % 10 == 0) {
+          console.log("Hiển thị");
+          document.body.style.backgroundImage = `url(${backgroundImageArr[imageChange]})`;
+          imageChange++;
+          if (imageChange == backgroundImageArr.length) {
+            imageChange = 0;
+            return;
+          }
+        }
+      }
+
+      function videoChange() {
+        videoSecond++;
+        if (videoSecond % 10 == 0) {
+          document.getElementsByTagName("video")[0].src = `${videoArr[video]}`;
+          video++;
+          console.log("a", `${videoArr[video]}`);
+          if (video == videoArr.length) {
+            video = 0;
+            return;
+          }
+        }
+      }
+    </script>
   </body>
 </html>

@@ -5,8 +5,233 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Trang chủ</title>
+    <style>
+      table {
+        margin-top: 10px;
+      }
+      th,
+      td {
+        border: 1px solid black;
+        text-align: center;
+        padding: 10px;
+      }
+      span {
+        margin: 10px;
+      }
+      input {
+        margin: 10px 0px 10px 0px;
+      }
+    </style>
   </head>
   <body>
     <h1>Quyết tâm học lập trình</h1>
+    <input
+      id="nameProduct"
+      class="nameProduct"
+      type="text"
+      placeholder="Tên sản phẩm"
+    />
+    <input
+      id="priceProduct"
+      class="priceProduct"
+      type="text"
+      placeholder="Giá sản phẩm"
+    />
+    <button onclick="addProduct()">Thêm sản phẩm vào giỏ hàng</button><br />
+    <span id="check"></span><br />
+    <input id="findProduct" type="text" placeholder="Tìm sản phẩm theo tên" />
+    <button onclick="findProduct()">tìm kiếm</button><br />
+    <span id="check1"></span><br />
+
+    <table action="">
+      <thead>
+        <tr>
+          <th>STT</th>
+          <th>Tên sản phẩm</th>
+          <th>Giá</th>
+          <th>Tác vụ</th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+
+    <script>
+      let productArr = JSON.parse(localStorage.getItem("product")) || [];
+
+      renderProduct();
+
+      function addProduct() {
+        document.getElementById("check1").innerHTML = "";
+        let nameProduct = document.getElementById("nameProduct").value;
+        let priceProduct = document.getElementById("priceProduct").value;
+        let productObj = {
+          name: nameProduct,
+          price: priceProduct,
+          id: uuid(),
+        };
+        for (let i = 0; i < productArr.length; i++) {
+          if (productArr[i].name == nameProduct) {
+            document.getElementById("check").innerHTML =
+              "Sản phẩm đã được thêm, vui lòng thêm sản phẩm khác";
+            renderProduct();
+            return;
+          }
+          if (nameProduct == "" || priceProduct == "") {
+            document.getElementById("check").innerHTML =
+              "Bạn chưa nhập thông tin sản phẩm, vui lòng nhập lại";
+            return;
+          }
+        }
+        productArr.push(productObj);
+        localStorage.setItem("product", JSON.stringify(productArr));
+        console.log("Mảng sản phẩm", productArr);
+        renderProduct();
+      }
+
+      function renderProduct() {
+        let html = "";
+        console.log("Hiển thị sản phẩm lên bảng");
+        for (let i = 0; i < productArr.length; i++) {
+          html += `
+
+                        <tr>
+                          <td>${i + 1}</td>
+                          <td>${productArr[i].name}</td>
+                          <td>${productArr[i].price}</td>
+                          <td>
+                            <span>
+                              <button onclick=deleteProduct(${
+                                productArr[i].id
+                              })>Xóa</button>
+                              </span>
+                              <span>
+                              <button onclick=editProduct(${
+                                productArr[i].id
+                              })>Sửa</button>
+                            </span>
+                            </td>
+                        </tr>
+
+                        `;
+        }
+        document.getElementById("tbody").innerHTML = html;
+      }
+      function editProduct(id) {
+        console.log("Chạy vào hàm sửa");
+        let index = productArr.findIndex((item) => {
+          return item.id == id;
+        });
+        console.log("sửa product vị trí thứ id", id);
+        let editedName = productArr[index].name;
+        let editedPrice = productArr[index].price;
+        let editName = prompt("Nhập vào tên sản phẩm muốn thay đổi");
+        for (let i = 0; i < productArr.length; i++) {
+          if (productArr[i].name == editName) {
+            document.getElementById("check").innerHTML =
+              "Sản phẩm đã được thêm, vui lòng sửa lại sản phẩm khác";
+            console.log(
+              "Sản phẩm đã được thêm, vui lòng sửa lại sản phẩm khác"
+            );
+            renderProduct();
+            return;
+          }
+        }
+        productArr[index].name = editName;
+        let editPrice = prompt("Nhập vào giá sản phẩm cần thay đổi");
+        productArr[index].price = editPrice;
+        localStorage.setItem("product", JSON.stringify(productArr));
+        console.log("Mảng sản phẩm", productArr);
+        document.getElementById(
+          "check"
+        ).innerHTML = `sản phẩm ${editedName} với giá ${editedPrice} đồng đã được thay đổi bằng sản phẩm ${editName} với giá ${editPrice} đồng`;
+        renderProduct();
+      }
+
+      function deleteProduct(id) {
+        console.log("Chạy vào hàm xóa");
+        let confirmProduct = confirm("Bạn có muốn xóa hay không");
+        if (!confirmProduct) {
+          return;
+        }
+        let index = productArr.findIndex((item) => {
+          return item.id == id;
+        });
+        console.log("Xóa id vị trí", index);
+        productArr.splice(index, 1);
+        localStorage.setItem("product", JSON.stringify(productArr));
+        console.log("Mảng sản phẩm", productArr);
+        renderProduct();
+      }
+
+      function findProduct() {
+        console.log("chạy vào hàm tìm kiếm");
+        document.getElementById("check").innerHTML = "";
+        let find = document.getElementById("findProduct").value;
+        let checkFind = -1;
+        for (let i = 0; i < productArr.length; i++) {
+          if (productArr[i].name == find) {
+            checkFind = i;
+          }
+        }
+        if (checkFind == "") {
+          document.getElementById("check1").innerHTML =
+            "Bạn chưa nhập thông tin, vui lòng nhập lại";
+          return;
+        } else if (checkFind === -1) {
+          console.log("Sản phẩm không thấy trong giỏ hàng");
+          document.getElementById("check1").innerHTML =
+            "Sản phẩm tìm kiếm không có trong giỏ hàng";
+        } else {
+          html = `
+                        <tr>
+                          <td>${checkFind + 1}</td>
+                          <td>${productArr[checkFind].name}</td>
+                          <td>${productArr[checkFind].price}</td>
+                          <td>
+                            <span>
+                              <button onclick=deleteProduct(${
+                                productArr[checkFind].id
+                              })>Xóa</button>
+                              </span>
+                              <span>
+                              <button onclick=editProduct(${
+                                productArr[checkFind].id
+                              })>Sửa</button>
+                            </span>
+                            </td>
+                        </tr>
+                        `;
+          document.getElementById("tbody").innerHTML = html;
+        }
+      }
+      function uuid() {
+        return Math.floor(Math.random() * 999 + new Date().getMilliseconds());
+      }
+      function keyProduct() {
+        console.log("chạy vào hàm keyProduct");
+        document
+          .getElementsByClassName("nameProduct")[0]
+          .addEventListener("keypress", (event) => {
+            if (event.keyCode == 13) {
+              addProduct();
+            }
+          });
+        document
+          .getElementsByClassName("priceProduct")[0]
+          .addEventListener("keypress", (event) => {
+            if (event.keyCode == 13) {
+              addProduct();
+            }
+          });
+        document
+          .getElementById("findProduct")
+          .addEventListener("keypress", (event) => {
+            if (event.keyCode == 13) {
+              findProduct();
+            }
+          });
+      }
+      keyProduct();
+    </script>
   </body>
 </html>

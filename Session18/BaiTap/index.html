@@ -42,6 +42,16 @@
           email: email,
           password: password,
         };
+        if (
+          name == "" ||
+          email == "" ||
+          password == "" ||
+          confirmPassword == ""
+        ) {
+          document.getElementById("notification").innerHTML =
+            "Vui lòng nhập tài khoản và mật khẩu";
+          return;
+        }
         if (checkPassword()) {
           resetInput();
           document.getElementById("notification").innerHTML =
@@ -93,6 +103,16 @@
       function login() {
         window.location.href = "./login.html";
       }
+      function enterPress() {
+        document
+          .getElementsByTagName("body")[0]
+          .addEventListener("keypress", (event) => {
+            if (event.keyCode == 13) {
+              signIn();
+            }
+          });
+      }
+      enterPress();
     </script>
   </body>
 </html>

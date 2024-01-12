@@ -86,6 +86,11 @@ body {
     height: 20px;
     width: 150px;
     display: flex;
-    justify-content: center; }
+    justify-content: center;
+    color: white; }
+  body video {
+    width: 150px;
+    height: 100px;
+    cursor: pointer; }
 
 /*# sourceMappingURL=Style.css.map */
