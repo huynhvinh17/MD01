@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PopUp</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="contaner">
+      <div class="up">
+        <p>
+          Discount offer: <span><b>10% off</b> </span>
+        </p>
+        <button onclick="closePopup()">x</button>
+      </div>
+      <div class="middle">
+        <div class="iconPresent">
+          <span class="material-symbols-outlined">
+            featured_seasonal_and_gifts
+          </span>
+        </div>
+        <div style="margin-bottom: 20px; margin-right: 10px">
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis
+            dolore blanditiis tempora quidem molestiae ipsum, at, repellendus
+            unde.
+          </p>
+          <p>
+            <b>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint
+              itaque, perferendis minima quos totam placeat.
+            </b>
+          </p>
+          <span
+            style="background-color: red; color: white; padding: 4px"
+            class="code"
+            ><b> abacde </b>
+          </span>
+        </div>
+      </div>
+      <div class="down">
+        <button
+          style="background-color: red; color: white"
+          onclick="getPopup()"
+        >
+          GET IT NOW
+          <span class="material-symbols-outlined"> diamond </span>
+        </button>
+        <button
+          onclick="closePopup()"
+          style="color: red; background-color: white"
+        >
+          NO, THANKS
+        </button>
+      </div>
+    </div>
+    <p id="notification"></p>
+    <script>
+      function getPopup() {
+        window.location.href = "./popUp.html";
+      }
+      function closePopup() {
+        document.getElementsByClassName("contaner")[0].innerHTML = "";
+        document.getElementById("notification").innerHTML = "popup đã được ẩn";
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FORM THÔNG TIN HỌC VIÊN</title>
+    <style>
+      .infoStudent tr {
+        display: flex;
+        flex-direction: column;
+        margin-right: 20px;
+      }
+      .infoStudent tbody {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+      .infoStudent td {
+        height: 30px;
+      }
+      body,
+      .infoStudent form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .infoStudent .submit {
+        bottom: 0px;
+      }
+
+      .listStudent td,
+      .listStudent th,
+      .listStudent table {
+        border: 1px solid black;
+      }
+      .listStudentTableTbody span {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Thông tin học viên</h2>
+    <form action="/action_page.php" class="infoStudent">
+      <table>
+        <tbody>
+          <tr>
+            <td><label for="name"> Họ và tên</label></td>
+            <td><label for="email"> Email </label></td>
+            <td><label for="phone"> Số điện thoại</label></td>
+            <td><label for="address">Quê quán</label></td>
+            <td><label for="gender">Giới tính</label></td>
+          </tr>
+          <tr>
+            <td>
+              <input
+                type="text"
+                id="name"
+                class="name"
+                required
+                placeholder="Họ và tên"
+              /><br />
+            </td>
+            <td>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="email"
+                required
+                pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                placeholder="Email"
+              /><br />
+            </td>
+            <td>
+              <input
+                type="tel"
+                id="phone"
+                class="phone"
+                pattern="[0-9]{4}[0-9]{3}[0-9]{3}"
+                required
+                placeholder="0123456789"
+              /><br />
+            </td>
+            <td>
+              <input
+                type="text"
+                id="address"
+                class="address"
+                placeholder="Địa chỉ"
+                required
+              /><br />
+            </td>
+            <td>
+              <input
+                name="gender"
+                type="radio"
+                id="man"
+                class="gender"
+                checked
+                onclick="checkGender()"
+              />
+              <label for="man">Nam</label>
+              <input
+                name="gender"
+                type="radio"
+                id="woman"
+                class="gender"
+                onclick="checkGender()"
+              />
+              <label for="woman">Nữ</label><br />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <input
+        class="save"
+        type="submit"
+        onclick="addStudent(event)"
+        value="Save"
+      />
+      <label class="notification"></label>
+    </form>
+
+    <form action="" class="listStudent">
+      <h2>Danh sách học viên</h2>
+      <label for="findStudent">Tìm kiếm theo tên học viên: </label>
+      <input type="text" placeholder="Nhập vào tên học viên" id="findStudent" />
+      <input type="submit" value="Search" onclick="findStudents(event)" /><br />
+      <span class="searchNotice"></span>
+      <table>
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Họ tên</th>
+            <th>Email</th>
+            <th>Điện thoại</th>
+            <th>Địa chỉ</th>
+            <th>Giới tính</th>
+            <th>Hành động</th>
+            <th>
+              <button class="sortName" type="button" onclick="sortStudents()">
+                Sắp xếp theo tên
+              </button>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="listStudentTableTbody"></tbody>
+      </table>
+    </form>
+
+    <script>
+      let studentArr = JSON.parse(localStorage.getItem("student")) || [];
+      renderStudents();
+
+      //Tạo hàm render userStudent
+      function renderStudents() {
+        let html = "";
+        for (let i = 0; i < studentArr.length; i++) {
+          html += `
+                <tr>
+                  <td>${i + 1}</td>
+                  <td>${studentArr[i].name}</td>
+                  <td>${studentArr[i].email}</td>
+                  <td>${studentArr[i].phone}</td>
+                  <td>${studentArr[i].address}</td>
+                  <td>${studentArr[i].gender}</td>
+                  <td><span onclick=editStudentS(${
+                    studentArr[i].id
+                  })>edit</span> | <span onclick=deleteStudents(${
+            studentArr[i].id
+          })>delete</span></td>
+                </tr>
+                          `;
+        }
+        document.getElementsByClassName(
+          "listStudentTableTbody"
+        )[0].innerHTML = `${html}`;
+      }
+
+      //Thêm sinh viên
+      function addStudent(event) {
+        event.preventDefault();
+        let name = document.getElementById("name").value;
+        let email = document.getElementById("email").value;
+        let phone = document.getElementById("phone").value;
+        let address = document.getElementById("address").value;
+
+        if (name == "" || email == "" || phone == "" || address == "") {
+          document.getElementsByClassName("notification")[0].innerHTML =
+            "Vui lòng nhập đầy đủ thông tin";
+          return;
+        }
+        students = {
+          name: name,
+          email: email,
+          phone: phone,
+          address: address,
+          gender: checkGender(),
+          id: uuid(),
+        };
+        studentArr.push(students);
+        console.log("mảng thêm vào", studentArr);
+        localStorage.setItem("student", JSON.stringify(studentArr));
+        renderStudents();
+        document.getElementsByClassName("notification")[0].innerHTML = "";
+        inputForm("", "", "", "");
+      }
+
+      //Kiểm tra gender
+      function checkGender() {
+        let gender = document.getElementsByClassName("gender")[0];
+        if (gender.checked) {
+          console.log("Nam");
+          return "Nam";
+        } else {
+          console.log("nữ");
+          return "Nữ";
+        }
+      }
+
+      //delete student
+      function deleteStudents(id) {
+        let confirmDelete = confirm("Bạn có muốn xóa hay không");
+        if (!confirmDelete) {
+          return;
+        }
+        let index = studentArr.findIndex((item) => {
+          return item.id == id;
+        });
+
+        studentArr.splice(index, 1);
+        console.log("Đã xóa vị trí ", id);
+        localStorage.setItem("student", JSON.stringify(studentArr));
+        renderStudents();
+      }
+
+      //gọi form
+      function inputForm(name, email, phone, address) {
+        document.getElementById("name").value = name;
+        document.getElementById("email").value = email;
+        document.getElementById("phone").value = phone;
+        document.getElementById("address").value = address;
+      }
+
+      //Hàm sửa
+      function editStudentS(id) {
+        console.log("Chạy vào hàm sửa");
+        let index = studentArr.findIndex((item) => {
+          return item.id == id;
+        });
+
+        inputForm(
+          studentArr[index].name,
+          studentArr[index].email,
+          studentArr[index].phone,
+          studentArr[index].address
+        );
+
+        let editGender = document.getElementsByClassName("gender");
+        if (studentArr[index].gender === "Nữ") {
+          editGender[0].checked = false;
+          editGender[1].checked = true;
+        } else {
+          editGender[0].checked = true;
+          editGender[1].checked = false;
+        }
+        console.log("id", id);
+        document
+          .getElementsByClassName("save")[0]
+          .addEventListener("click", () => {
+            studentArr.splice(index, 1);
+            localStorage.setItem("student", JSON.stringify(studentArr));
+            renderStudents();
+          });
+      }
+
+      let temp = 0;
+      // Sắp xếp theo alpha b
+      function sortStudents() {
+        if (temp == 0) {
+          temp = 1;
+          studentArr.sort((a, b) => {
+            return a.name.localeCompare(b.name);
+          });
+        } else {
+          temp = 0;
+          studentArr.sort((a, b) => {
+            return b.name.localeCompare(a.name);
+          });
+        }
+        console.log("Mảng sau khi sort", studentArr);
+        localStorage.setItem("student", JSON.stringify(studentArr));
+        renderStudents();
+      }
+
+      //Tạo hàm id ngẫu nhiên
+      function uuid() {
+        return Math.floor(
+          Math.random() * 999999 + new Date().getMilliseconds()
+        );
+      }
+
+      function findStudents() {
+        let notExist = document.getElementsByClassName("searchNotice")[0];
+        let inputSearch = document.getElementById("findStudent");
+        event.preventDefault();
+        console.log("chạy vào hàm find");
+        let check = false;
+        let searchArr = [];
+        let name = document.getElementById("findStudent").value;
+        for (let i = 0; i < studentArr.length; i++) {
+          if (studentArr[i].name == name) {
+            searchArr.push(studentArr[i]);
+            check = true;
+          }
+        }
+        if (!check) {
+          notExist.innerHTML = "Tên tìm kiếm không tồn tại";
+          inputSearch.value = "";
+          renderStudents();
+        } else {
+          notExist.innerHTML = "";
+          let html = "";
+          for (let i = 0; i < searchArr.length; i++) {
+            html += `
+                <tr>
+                  <td>${i + 1}</td>
+                  <td>${searchArr[i].name}</td>
+                  <td>${searchArr[i].email}</td>
+                  <td>${searchArr[i].phone}</td>
+                  <td>${searchArr[i].address}</td>
+                  <td>${searchArr[i].gender}</td>
+                  <td><span onclick=editStudentS(${
+                    searchArr[i].id
+                  })>edit</span> | <span onclick=deleteStudents(${
+              searchArr[i].id
+            })>delete</span></td>
+                </tr>
+                          `;
+          }
+          document.getElementsByClassName(
+            "listStudentTableTbody"
+          )[0].innerHTML = `${html}`;
+          inputSearch.value = "";
+        }
+      }
+    </script>
+  </body>
+</html>
