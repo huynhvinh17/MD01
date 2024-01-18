@@ -198,11 +198,18 @@
         };
 
         console.log("isUpdate", isUpdate);
+
         if (isUpdate != -1) {
           let updateIndex = studentArr.findIndex((item) => {
             return item.id == isUpdate;
           });
-          studentArr.splice(updateIndex, 1, { ...studentArr, id: isUpdate });
+
+          console.log("updateIndex", updateIndex);
+
+          let updateArr = [];
+          updateArr.push(students);
+          console.log("updateArr", updateArr);
+          studentArr.splice(updateIndex, 1, students);
           localStorage.setItem("student", JSON.stringify(studentArr));
           renderStudents(studentArr);
           isUpdate = -1;
@@ -357,28 +364,6 @@
         } else {
           notExist.innerHTML = "";
           renderStudents(searchArr);
-          /* 
-          let html = "";
-          searchArr.forEach((item, index, arr) => {
-            html += `
-                            <tr>
-                              <td>${index + 1}</td>
-                              <td>${arr[index].name}</td>
-                              <td>${arr[index].email}</td>
-                              <td>${arr[index].phone}</td>
-                              <td>${arr[index].address}</td>
-                              <td>${arr[index].gender}</td>
-                              <td><span onclick=editStudentS(${
-                                arr[index].id
-                              })>edit</span> | <span onclick=deleteStudents(${
-              arr[index].id
-            })>delete</span></td>
-                            </tr>
-                                      `;
-          });
-          document.getElementsByClassName(
-            "listStudentTableTbody"
-          )[0].innerHTML = `${html}`; */
           inputSearch.value = "";
         }
       }
@@ -388,8 +373,6 @@
           /^((?:[A-Za-z0-9!#$%&'*+\-\/=?^_`{|}~]|(?<=^|\.)"|"(?=$|\.|@)|(?<=".*)[ .](?=.*")|(?<!\.)\.){1,64})(@)((?:[A-Za-z0-9.\-])*(?:[A-Za-z0-9])\.(?:[A-Za-z0-9]){2,})$/i;
         return expression.test(String(email).toLowerCase());
       };
-
-      //Làm sao ràng buộc nút sửa và nút thêm,
     </script>
   </body>
 </html>
