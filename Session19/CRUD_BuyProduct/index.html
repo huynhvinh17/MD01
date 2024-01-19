@@ -4,21 +4,216 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>cart</title>
+    <style>
+      img {
+        width: 100px;
+        height: 100px;
+      }
+      th,
+      td {
+        text-align: center;
+        border: 1px solid black;
+        padding: 10px;
+      }
+      span {
+        cursor: pointer;
+      }
+    </style>
   </head>
   <body>
     <form action="">
-      <table>
+      <label for="findCart"><b>Nhập sản phẩm muốn tìm kiếm</b></label
+      ><br />
+      <input type="text" id="findCart" placeholder="Nhập tên sản phẩm" />
+      <input
+        onclick="findPhone()"
+        type="submit"
+        value="Search"
+        id="addToStore"
+        placeholder=""
+      />
+
+      <table class="cart">
         <thead>
-          <th>
-            <tr></tr>
-            <tr></tr>
-            <tr></tr>
-            <tr></tr>
-            <tr></tr>
-          </th>
+          <h2>Sản phẩm bạn đã thêm vào giỏ hàng</h2>
+          <tr>
+            <td>STT</td>
+            <td>Tên sản phẩm</td>
+            <td>Hình ảnh</td>
+            <td>Giá tiền</td>
+            <td>Số lượng</td>
+            <td>Tổng</td>
+            <td>Trạng thái</td>
+          </tr>
         </thead>
+        <tbody class="buyProduct"></tbody>
+      </table>
+
+      <table class="store">
+        <h2>Các loại sản phẩm có trong cửa hàng</h2>
+        <thead>
+          <tr>
+            <td>STT</td>
+            <td>Tên sản phẩm</td>
+            <td>Hình ảnh</td>
+            <td>Giá tiền</td>
+            <td>Số lượng có sẵn</td>
+            <td>Mô tả sản phẩm</td>
+            <td>Trạng thái</td>
+          </tr>
+        </thead>
+        <tbody class="cartStore"></tbody>
       </table>
     </form>
+
+    <script>
+      let phoneImg = [
+        "./phoneImage/Galaxy-A32-300x300.jpg",
+        "./phoneImage/Samsung-Galaxy-A03-4G-Price-160x212.jpg",
+        "./phoneImage/Samsung-Galaxy-A12-price-300x300.jpg",
+        "./phoneImage/Samsung-Galaxy-A22-300x142.jpg",
+        "./phoneImage/Samsung-Galaxy-A42-300x300.jpg",
+        "./phoneImage/Samsung-Galaxy-A51s-2-300x300.jpg",
+        "./phoneImage/Samsung-Galaxy-A52-Price-300x300.jpg",
+        "./phoneImage/Samsung-Galaxy-A53-Price-160x212.jpg",
+        "./phoneImage/Samsung-Galaxy-A71s-300x300.jpg",
+        "./phoneImage/Samsung-Galaxy-A72-300x300.jpg",
+      ];
+      let store = [];
+      let phoneName = [];
+      let phonePrice = [];
+      let phoneNum = [];
+      let phoneDetail = [];
+      let phoneStore = {};
+
+      let status = -1;
+
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      rendercart();
+      function addToStore() {
+        for (let i = 0; i < 10; i++) {
+          phoneName[i] = `A3${i}`;
+          phonePrice[i] = 1000 * `${i + 1}`;
+          phoneNum[i] = 999;
+          phoneDetail[i] = `SamSung Galaxy A3${i}`;
+        }
+        for (let i = 0; i < 10; i++) {
+          phoneStore = {
+            img: phoneImg[i],
+            name: phoneName[i],
+            price: phonePrice[i],
+            num: phoneNum[i],
+            detail: phoneDetail[i],
+            id: uuid(),
+          };
+          store.push(phoneStore);
+        }
+        console.log("store", store);
+        localStorage.setItem("productInStore", JSON.stringify(store));
+      }
+      addToStore();
+      renderStore();
+
+      function renderStore() {
+        let html = "";
+        store.forEach((item, index, arr) => {
+          html += `
+                      <tr>
+                          <td>${index + 1}</td>
+                          <td>${arr[index].name}</td>
+                          <td><img src="${arr[index].img}" alt=""></td>
+                          <td>${arr[index].price}</td>
+                          <td>${arr[index].num}</td>
+                          <td>${arr[index].detail}</td>
+                          <td><span onclick=addCart(${
+                            arr[index].id
+                          })>Thêm vào giỏ hàng</span></td>
+                      </tr>
+                      `;
+        });
+        document.getElementsByClassName("cartStore")[0].innerHTML = html;
+      }
+
+      function addCart(index) {
+        //Tìm index của store khi store[i].id = id
+        let idStore = store.findIndex((item) => {
+          return item.id == index;
+        });
+
+        //Tìm index của cart khi item.name = store[idStore].name
+        let idCart = cart.findIndex((item) => {
+          return item.name == store[idStore].name;
+        });
+
+        console.log("idStore", idStore);
+        console.log("idCart", idCart);
+
+        //Kiểm tra nếu chưa có trong giỏ hàng thì push sản phẩm từ cart vào trong giỏ hàng
+
+        if (idCart == -1) {
+          cart.push(store[idStore]);
+          let idCart1 = cart.findIndex((item) => {
+            return item.name == store[idStore].name;
+          });
+          cart[idCart1].num = 1;
+          store[idStore].num = 998;
+          renderTable();
+          return;
+        }
+
+        if (cart[idCart].name === store[idStore].name) {
+          cart[idCart].num += 1;
+          store[idStore].num = 999 - cart[idCart].num;
+          console.log("id_store", idStore);
+          console.log("id_store.num", store[idStore].num);
+          renderTable();
+          return;
+        }
+      }
+
+      function renderTable() {
+        localStorage.setItem("cart", JSON.stringify(cart));
+        localStorage.setItem("productInStore", JSON.stringify(store));
+        rendercart();
+        renderStore();
+      }
+      function rendercart() {
+        let html = "";
+        cart.forEach((item, id, arr) => {
+          html += `
+          <tr>
+                          <td>${id + 1}</td>
+                          <td>${arr[id].name}</td>
+                          <td><img src="${arr[id].img}" alt=""></td>
+                          <td>${arr[id].price}</td>
+                          <td>${arr[id].num}</td>
+                          <td>${arr[id].detail}</td>
+                          <td><span onclick=addCart(${
+                            arr[id].id
+                          })>Thêm vào giỏ hàng</span></td>
+            </tr>
+          `;
+        });
+        document.getElementsByClassName("buyProduct")[0].innerHTML = html;
+      }
+
+      function uuid() {
+        return Math.floor(
+          Math.random() * 999999 + new Date().getMilliseconds()
+        );
+      }
+
+      function findPhone(findStore) {
+        let findName = document.getElementById("findCart").value;
+        console.log("findName", findName);
+
+        findStore = store.filter((item) => {
+          return item.name.indexOf(findName) != -1;
+        });
+        console.log("findStore", findStore);
+        renderStore(findStore);
+      }
+    </script>
   </body>
 </html>
