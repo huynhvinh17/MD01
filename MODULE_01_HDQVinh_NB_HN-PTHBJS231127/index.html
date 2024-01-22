@@ -219,6 +219,7 @@
           return;
         }
 
+        //Tạo Obj
         students = {
           name: name,
           email: email,
@@ -260,7 +261,7 @@
           console.log("Email đã được nhập, vui lòng nhập email khác");
           document.getElementsByClassName("notification")[0].innerHTML =
             "Email đã được nhập, vui lòng nhập email khác";
-          return false;
+          return;
         }
 
         studentArr.push(students);
