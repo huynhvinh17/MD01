@@ -248,6 +248,20 @@
           return;
         }
 
+        //Kiểm tra email có trùng hay không
+        let checkEmail = -1;
+        studentArr.forEach((item) => {
+          if (email == item.email) {
+            checkEmail = item.id;
+          }
+        });
+        if (checkEmail !== -1) {
+          console.log("Email đã được nhập, vui lòng nhập email khác");
+          document.getElementsByClassName("notification")[0].innerHTML =
+            "Email đã được nhập, vui lòng nhập email khác";
+          return false;
+        }
+
         studentArr.push(students);
         console.log("mảng thêm vào", studentArr);
         localStorage.setItem("student", JSON.stringify(studentArr));
@@ -404,20 +418,6 @@
         if (phoneArr.length != 10) {
           document.getElementsByClassName("notification")[0].innerHTML =
             "Vui lòng nhập đúng định dạng số điện thoại";
-          return false;
-        }
-
-        //Kiểm tra email có trùng hay không
-        let checkEmail = -1;
-        studentArr.forEach((item) => {
-          if (email == item.email) {
-            checkEmail = item.id;
-          }
-        });
-        if (checkEmail !== -1) {
-          console.log("Email đã được nhập, vui lòng nhập email khác");
-          document.getElementsByClassName("notification")[0].innerHTML =
-            "Email đã được nhập, vui lòng nhập email khác";
           return false;
         }
       }
