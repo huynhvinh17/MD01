@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+  </head>
+  <style>
+    body {
+      padding: 0px;
+      margin: 0px;
+      box-sizing: border-box;
+      width: 700px;
+      height: 500px;
+    }
+    .selectCard {
+      display: flex;
+      flex-direction: column;
+      align-items: left;
+      margin: 20px 0 0 20px;
+      gap: 10px;
+    }
+    tr,
+    th,
+    td {
+      border: 1px solid black;
+    }
+    i {
+      color: white;
+      font-size: 50px;
+      background-color: blue;
+    }
+
+    #submit {
+      border-radius: 10px;
+      background-color: blue;
+      color: white;
+      width: 100px;
+    }
+
+    #submit:hover,
+    i:hover {
+      scale: 1.2;
+      cursor: pointer;
+    }
+    .formCardNumber {
+      display: flex;
+    }
+    tbody span {
+      background-color: aquamarine;
+      border-radius: 10px;
+      padding: 5px;
+      border: 1px solid aquamarine;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    tbody tr td {
+      align-self: center;
+    }
+  </style>
+  <body>
+    <form action="" class="selectCard">
+      <b>Select Card</b>
+      <div >
+        </div class="showImgCard">
+        <div class="cross-card"></div>
+            <img src="" class="showImg" alt="">
+        <span><i class="fab fa-cc-paypal" "></i></span>
+        <span><i class="fab fa-cc-mastercard" ""></i></span>
+        <span><i class="fab fa-cc-visa""></i></span>
+        <span><i class="fab fa-cc-amex""></i></span>
+        <span><i class="fab fa-cc-discover""></i></span> <br />
+      </div>
+      <div>
+        <label for="cardNumber">Card Number</label><br />
+        <input
+          type="number"
+          id="cardNumber"
+          placeholder="4856 5646 1655 5486"
+          required
+        /><br />
+      </div>
+      <div class="formCardNumber">
+        <div>
+          <label for="expireDate"> Expire Date</label><br />
+          <input type="date" id="expireDate" placeholder="MM/YY" required />
+        </div>
+        <div>
+          <label for="cvcCvv">CVC/CVV</label><br />
+          <input type="number" id="cvcCvv" placeholder="***" required />
+        </div>
+      </div>
+      <input type="submit" value="Save" onclick="addCard(event)" id="submit" />
+      <table>
+        <thead>
+          <tr>
+            <th>STT</th>
+            <th>Card Img</th>
+            <th>Card Number</th>
+            <th>Expire Date</th>
+            <th>CVV</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <span id="notification"></span>
+        <tbody class="cardTable"></tbody>
+      </table>
+    </form>
+    <script>
+      let cardImg = [
+        "./image/cc-paypal.svg",
+        "./image/cc-mastercard.svg",
+        "./image/cc-visa.svg",
+        "./image/cc-amex.svg",
+        "./image/cc-discover.svg",
+      ];
+      let cardNumberArr = JSON.parse(localStorage.getItem("cardNumber")) || [];
+      renderCard();
+      console.log("cardNumberArr", cardNumberArr);
+      let isUpdate = -1;
+      let isView = -1;
+      //Hiển thị card lên màn hình
+      function renderCard() {
+        let html = "";
+        cardNumberArr.forEach((item, index, arr) => {
+          html += `
+                          <tr>
+                              <td>${index + 1}</td>
+                              <td><img src='${cardImg[0]}' alt="" /></td>
+                              <td>${arr[index].cardNumber}</td>
+                              <td>${arr[index].expireDate}</td>
+                              <td>${arr[index].cvcCvv}</td>
+                          <td>
+                    <span onclick = viewCard(${arr[index].id})>View</span>
+                    <span onclick = editCard(${arr[index].id})>Edit</span>
+                    <span onclick =deleteCard(${arr[index].id})>Delete</span>
+                  </td>
+                </tr>
+                      `;
+        });
+        document.getElementsByClassName("cardTable")[0].innerHTML = html;
+      }
+
+      function addCard(event) {
+        event.preventDefault();
+        console.log("hàm con", validateCard());
+        if (!validateCard()) {
+          return;
+        }
+        console.log("Chạy vào hàm add");
+
+        let expireDate = document.getElementById("expireDate").value;
+        let cvcCvv = document.getElementById("cvcCvv").value;
+        let cardNumber = document.getElementById("cardNumber").value;
+
+        let cardNumberObj = {
+          cardImg: cardImg[0],
+          cardNumber: hideCardNumber(),
+          expireDate: expireDate,
+          cvcCvv: hideCVV(),
+          id: uuid(),
+          showCardNumber: cardNumber,
+          showCvcCvv: cvcCvv,
+        };
+
+        let showCardNumber = {};
+        console.log("isUpdate", isUpdate);
+        if (isUpdate !== -1) {
+          let updateIndex = cardNumberArr.findIndex((item) => {
+            return item.id == isUpdate;
+          });
+
+          console.log("updateIndex", updateIndex);
+          let updateArr = [];
+          updateArr.push(cardNumberObj);
+          console.log("updateArr", updateArr);
+
+          cardNumberArr.splice(updateIndex, 1, cardNumberObj);
+          console.log("cardNumberObj", cardNumberArr);
+          localStorage.setItem("cardNumber", JSON.stringify(cardNumberArr));
+          renderCard();
+          isUpdate = -1;
+          return;
+        }
+
+        cardNumberArr.push(cardNumberObj);
+        console.log("cardNumberObj", cardNumberArr);
+        localStorage.setItem("cardNumber", JSON.stringify(cardNumberArr));
+        renderCard();
+        document.getElementById("notification").innerHTML = "";
+      }
+
+      //Thêm ID ngẫu nhiên
+      function uuid() {
+        return Math.floor(
+          Math.random() * 99999999 + new Date().getMilliseconds()
+        );
+      }
+
+      //Xóa thẻ
+      function deleteCard(index) {
+        let confirmCart = confirm("Bạn có muốn xóa hay không");
+        if (!confirmCart) {
+          return;
+        }
+        indexCard = cardNumberArr.findIndex((item) => {
+          return item.id == index;
+        });
+        console.log("cardNumberArr", cardNumberArr);
+        console.log("indexCard", indexCard);
+        console.log("id", index);
+        cardNumberArr.splice(indexCard, 1);
+        localStorage.setItem("cardNumber", JSON.stringify(cardNumberArr));
+        renderCard();
+      }
+
+      //Form hiển thị
+      function formCard(card, date, cvc) {
+        document.getElementById("cardNumber").value = card;
+        document.getElementById("expireDate").value = date;
+        document.getElementById("cvcCvv").value = cvc;
+      }
+
+      //Edit card
+      function editCard(index) {
+        console.log("Chạy vào hàm edit");
+        indexCard = cardNumberArr.findIndex((item) => {
+          return item.id == index;
+        });
+        isUpdate = index;
+        formCard(
+          cardNumberArr[indexCard].cardNumber,
+          cardNumberArr[indexCard].expireDate,
+          cardNumberArr[indexCard].cvcCvv
+        );
+      }
+
+      //Ẩn số thẻ
+
+      function hideCardNumber() {
+        let cardNumber = document.getElementById("cardNumber").value;
+        let hideCardNumber = cardNumber.split("");
+        for (let i = 0; i < hideCardNumber.length; i++) {
+          if (i >= 7 && i <= 12) {
+            hideCardNumber[i] = "*";
+          }
+        }
+        resultNumber = hideCardNumber.join("");
+        console.log("resultNumber", resultNumber);
+        return resultNumber;
+      }
+
+      //Ẩn CVV
+      function hideCVV() {
+        console.log("chạy vào hàm hide");
+        let hideCvcCvv = document.getElementById("cvcCvv").value;
+        let hide = hideCvcCvv.split("");
+        console.log("item", hide);
+        for (let i = 0; i < hide.length; i++) {
+          hide[i] = "*";
+        }
+        let cvcJoin = hide.join("");
+        console.log("cvcJoin", cvcJoin);
+        return cvcJoin;
+      }
+     
+      //button view số thẻ
+      let isViewCard=-1
+      function viewCard(index) {
+        console.log("chạy vào hàm view");
+        let viewIndex = cardNumberArr.findIndex((item) => {
+          return item.id == index;
+        });  
+        if (isViewCard == -1) {
+          cardNumberArr[viewIndex].cardNumber =
+            cardNumberArr[viewIndex].showCardNumber;
+          cardNumberArr[viewIndex].cvcCvv = cardNumberArr[viewIndex].showCvcCvv;
+          renderCard();
+          isViewCard = 1;
+          return;
+        }
+        if (isViewCard != -1) {
+          cardNumberArr[viewIndex].cardNumber = hideCardNumber();
+          cardNumberArr[viewIndex].cvcCvv = hideCVV();
+          renderCard();
+          isViewCard = -1;
+          return;
+        }
+      }
+
+      function validateCard() {
+        console.log("Chạy vào hàm validate");
+        let expireDate = document.getElementById("expireDate").value;
+        let cvcCvv = document.getElementById("cvcCvv").value;
+        let cardNumber = document.getElementById("cardNumber").value;
+        let validateCardNumber = cardNumber.split("");
+        let validateCVC = cvcCvv.split("");
+        if (
+          expireDate == "" ||
+          cvcCvv == "" ||
+          cardNumber == "" ||
+          validateCardNumber.length != 16 ||
+          validateCVC.length != 3
+        ) {
+          document.getElementById("notification").innerHTML =
+            "Vui lòng nhập đầy đủ thông tin";
+          return false;
+        }
+        return true;
+      }
+
+
+
+      function imgClick() {
+        let html = "";
+        for (let i = 0; i < 5; i++) {
+            html +=     
+            `
+             <img src="${cardImg[i]}" onclick=chooseImg(${i}) alt="">
+            `
+        }
+        document.getElementsByClassName("cross-card")[0].innerHTML = html
+      }
+      function chooseImg(index) {
+        console.log("index",index);
+        document.getElementsByClassName("showImg")[0].src = cardImg[index]
+      }
+    </script>
+  </body>
+</html>
