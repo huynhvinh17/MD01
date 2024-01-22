@@ -59,9 +59,6 @@
       font-size: 20px;
       cursor: pointer;
     }
-    tbody tr td {
-      align-self: center;
-    }
     .cross-card {
       display: flex;
       gap: 10px;
@@ -82,7 +79,7 @@
       <div class="showImgCard">
         <div class="cross-card"></div>
         <div class="showImg"></div>
-        <!--         <span><i class="fab fa-cc-paypal" "></i></span>
+        <!-- <span><i class="fab fa-cc-paypal" "></i></span>
         <span><i class="fab fa-cc-mastercard" ""></i></span>
         <span><i class="fab fa-cc-visa""></i></span>
         <span><i class="fab fa-cc-amex""></i></span>
@@ -137,8 +134,8 @@
       let isUpdate = -1;
       let isView = -1;
       let isImg = -1;
+      let isHideCard = -1;
       //Hiển thị ảnh lên form
-
       function renderImg() {
         let html = "";
         for (let i = 0; i < 5; i++) {
@@ -154,6 +151,31 @@
         isImg = index;
       }
       renderImg();
+
+      //button view số thẻ
+      let isViewCard = -1;
+      function viewCard(index) {
+        console.log("chạy vào hàm view");
+        let viewIndex = cardNumberArr.findIndex((item) => {
+          return item.id == index;
+        });
+        isHideCard = viewIndex;
+        if (isViewCard == -1) {
+          cardNumberArr[viewIndex].cardNumber =
+            cardNumberArr[viewIndex].showCardNumber;
+          cardNumberArr[viewIndex].cvcCvv = cardNumberArr[viewIndex].showCvcCvv;
+          renderCard();
+          isViewCard = 1;
+          return;
+        }
+        if (isViewCard != -1) {
+          cardNumberArr[viewIndex].cardNumber = hideCardNumber();
+          cardNumberArr[viewIndex].cvcCvv = "***";
+          renderCard();
+          isViewCard = -1;
+          return;
+        }
+      }
 
       //Hiển thị card lên màn hình
       function renderCard() {
@@ -195,13 +217,13 @@
           cardImg: cardImg[isImg],
           cardNumber: hideCardNumber(),
           expireDate: expireDate,
-          cvcCvv: hideCVV(),
+          cvcCvv: "***",
           id: uuid(),
           showCardNumber: cardNumber,
           showCvcCvv: cvcCvv,
         };
+
         isImg = -1;
-        let showCardNumber = {};
         console.log("isUpdate", isUpdate);
         if (isUpdate !== -1) {
           let updateIndex = cardNumberArr.findIndex((item) => {
@@ -276,8 +298,14 @@
       //Ẩn số thẻ
 
       function hideCardNumber() {
-        let cardNumber = document.getElementById("cardNumber").value;
-        let hideCardNumber = cardNumber.split("");
+        console.log("Chạy vào hàm hideCard");
+        let CardNumberValue;
+        if (isHideCard == -1) {
+          CardNumberValue = document.getElementById("cardNumber").value;
+        } else {
+          CardNumberValue = cardNumberArr[isHideCard].cardNumber;
+        }
+        let hideCardNumber = CardNumberValue.split("");
         for (let i = 0; i < hideCardNumber.length; i++) {
           if (i >= 7 && i <= 12) {
             hideCardNumber[i] = "*";
@@ -291,8 +319,8 @@
       //Ẩn CVV
       function hideCVV() {
         console.log("chạy vào hàm hide");
-        let hideCvcCvv = document.getElementById("cvcCvv").value;
-        let hide = hideCvcCvv.split("");
+        //let hideCvcCvv = document.getElementById("cvcCvv").value;
+        let hide = cardNumberArr[isHideCard].cvcCvv.split("");
         console.log("item", hide);
         for (let i = 0; i < hide.length; i++) {
           hide[i] = "*";
@@ -300,30 +328,6 @@
         let cvcJoin = hide.join("");
         console.log("cvcJoin", cvcJoin);
         return cvcJoin;
-      }
-
-      //button view số thẻ
-      let isViewCard = -1;
-      function viewCard(index) {
-        console.log("chạy vào hàm view");
-        let viewIndex = cardNumberArr.findIndex((item) => {
-          return item.id == index;
-        });
-        if (isViewCard == -1) {
-          cardNumberArr[viewIndex].cardNumber =
-            cardNumberArr[viewIndex].showCardNumber;
-          cardNumberArr[viewIndex].cvcCvv = cardNumberArr[viewIndex].showCvcCvv;
-          renderCard();
-          isViewCard = 1;
-          return;
-        }
-        if (isViewCard != -1) {
-          cardNumberArr[viewIndex].cardNumber = hideCardNumber();
-          cardNumberArr[viewIndex].cvcCvv = hideCVV();
-          renderCard();
-          isViewCard = -1;
-          return;
-        }
       }
 
       function validateCard() {
